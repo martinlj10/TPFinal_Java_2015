@@ -18,16 +18,17 @@ public class CatalogoUsuarios {
 			
 		 
 		
-		String SQLCons= "SELECT * FROM Usuarios WHERE idUsuario=?";
+		String SQLCons= "SELECT * FROM Usuarios WHERE username=? and password=?";
 		ConexionBD conecta = new ConexionBD();
 		conecta.OpenConection();
 		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
-		stmt.setString(1, pUsername);		
+		stmt.setString(1, pUsername);
+		stmt.setString(2, pPassword);
 		ResultSet rta = stmt.executeQuery();
 		while(rta.next())
 		{
 						
-						userBD.setUsername(rta.getString("idUsuario"));
+						userBD.setUsername(rta.getString("username"));
 						userBD.setPassword(rta.getString("password"));
 		}
 					rta.close();

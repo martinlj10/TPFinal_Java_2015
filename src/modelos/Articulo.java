@@ -1,5 +1,7 @@
 package modelos;
 
+import java.sql.Date;
+
 public class Articulo {
 	
 	private int codigo_articulo;
@@ -27,6 +29,8 @@ public class Articulo {
 	public float getPrecio() {
 		return precio;
 	}
+	
+	private Date fechaDesde_precio;
 
 	public void setPrecio(float precio) {
 		this.precio = precio;
@@ -40,6 +44,14 @@ public class Articulo {
 
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+
+	public Date getFechaDesde_precio() {
+		return fechaDesde_precio;
+	}
+
+	public void setFechaDesde_precio(Date fechaDesde_precio) {
+		this.fechaDesde_precio = fechaDesde_precio;
 	}
 
 		

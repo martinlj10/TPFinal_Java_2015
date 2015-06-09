@@ -43,8 +43,7 @@ public class ServletLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ControladorUsuario controladorUsuario = new ControladorUsuario();
-		/*ControladorElectrodomesticoNegocio controladorElectro= new ControladorElectrodomesticoNegocio();*///instanciar controlador de elementos a manejar
-		
+				
 		Usuario vUsuario;
 		HttpSession session= request.getSession(true);
 		
@@ -58,9 +57,9 @@ public class ServletLogin extends HttpServlet {
 	    {
 	    	session.setAttribute("usuario",vUsername);
 	    	session.setAttribute("controladorUsuario",controladorUsuario);
-	    	/*session.setAttribute("controladorElectro",controladorElectro);*/ // setear como atributo el controlador de elementos
+	    	
 	    	session.setAttribute("pass", vPassword);
-	    	request.getRequestDispatcher("/MenuElectro.jsp").forward(request, response);/*redirige a la pagina principal*/
+	    	request.getRequestDispatcher("/.jsp").forward(request, response);/*redirige a la pagina principal*/
 	    }
 	    else
 	    	{

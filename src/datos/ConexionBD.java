@@ -1,4 +1,5 @@
 package datos;
+import java.sql.*;
 import java.sql.Array;
 import java.sql.Blob;
 import java.sql.CallableStatement;
@@ -24,7 +25,7 @@ public class ConexionBD {
 
     Connection Cone = null;
 	static String Url = "jdbc:mysql://localhost:3306/";
-	static String dbName = "";/*nombre de la base de datos*/
+	static String dbName = "pdv_db";/*nombre de la base de datos*/
 	static String driver = "com.mysql.jdbc.Driver";
 	static String userName = "root"; 
 	static String password = "";

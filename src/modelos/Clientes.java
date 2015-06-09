@@ -50,6 +50,14 @@ public class Clientes {
 		this.zona = zona;
 	}
 	
+	public int getId_localidad() {
+		return id_localidad;
+	}
+
+	public void setId_localidad(int id_localidad) {
+		this.id_localidad = id_localidad;
+	}
+	private int id_localidad;
 	
 	
 	
