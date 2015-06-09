@@ -11,7 +11,7 @@ import modelos.Articulo;
 public class CatalogoArticulo {
 
 	public int AddArticulo(Articulo Articulo)
-	{
+	{ //se cargan los articulos
 		try{
 			//Agrega un articulo a la Tabla Articulos y tambien agrega el precio del articulo con la fecha de vigencia en la tabla Precios_Articulos
 		String SQLCons= "INSERT INTO Articulos (cod_articulo,descrip_articulo, stock)"+ " VALUES (?,?,?); INSERT INTO precio_articulos (id_articulo,fecha_vigencia, valor)"+ " VALUES (?,?,?)" ;
