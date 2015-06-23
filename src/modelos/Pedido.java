@@ -39,22 +39,6 @@ public class Pedido {
 		this.fechaEntrega = fechaEntrega;
 	}
 
-	public ArrayList<Articulo> getDetalleArticulos() {
-		return detalleArticulos;
-	}
-
-	public void setDetalleArticulos(ArrayList<Articulo> detalleArticulos) {
-		this.detalleArticulos = detalleArticulos;
-	}
-
-	public float getSubTotal() {
-		return subTotal;
-	}
-
-	public void setSubTotal(float subTotal) {
-		this.subTotal = subTotal;
-	}
-
 	public float getIVA() {
 		return IVA;
 	}
@@ -70,6 +54,22 @@ public class Pedido {
 	public void setTotal(float total) {
 		this.total = total;
 	}
+	
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public ArrayList<LineaPedido>  getDetalles() {
+		return detalles;
+	}
+
+	public void setDetalles(ArrayList<LineaPedido> detalles) {
+		this.detalles = detalles;
+	}
 
 	private Date fechaPedido;
 	
@@ -77,9 +77,9 @@ public class Pedido {
 	
 	private Date fechaEntrega;
 	
-	private ArrayList<Articulo> detalleArticulos;
+	private String estado;
 	
-	private float subTotal;
+	private ArrayList<LineaPedido> detalles;
 	
 	private float IVA;
 	

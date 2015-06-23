@@ -1,6 +1,6 @@
 package modelos;
 
-public class Clientes {
+public class Cliente {
 	private int id_cliente;
 
 	public int getId_cliente() {
