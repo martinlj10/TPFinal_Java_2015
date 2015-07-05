@@ -76,7 +76,7 @@ public class CatalogoCliente {
 	ArrayList<Cliente> ClientesAll = new ArrayList<Cliente>();
 		
 		try {
-			String SQLCons= "Select cod_cliente, razon_social, alias, nombre_localidad, descrip_zona FROM Clientes INNER JOIN localidades ON clientes.id_localidad = localidades.id_articulo INNER JOIN zonas ON localidades.id_zona =zonas.id_zona ORDER BY razon_social";
+			String SQLCons= "Select cod_cliente, razon_social, alias, nombre_localidad, descrip_zona FROM Clientes INNER JOIN localidades ON clientes.id_localidad = localidades.id_localidad INNER JOIN zonas ON localidades.id_zona =zonas.id_zona ORDER BY razon_social";
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);

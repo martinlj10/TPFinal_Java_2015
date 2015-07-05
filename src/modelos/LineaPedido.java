@@ -34,6 +34,7 @@ public class LineaPedido {
 	public void setNroLinea(int nroLinea) {
 		this.nroLinea = nroLinea;
 	}
+	
 	private int nroLinea;
 	private int nroPedido;
 	private Articulo art;
