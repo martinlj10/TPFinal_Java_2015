@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 public class Pedido {
 
-	private String cliente;
+	private Cliente cliente;
 
-	public String getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(String cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 	
