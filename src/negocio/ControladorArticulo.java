@@ -41,7 +41,7 @@ public class ControladorArticulo {
 		modifArticulo.setFechaDesde_precio(pFecha_precio);
 		modifArticulo.setPrecio(pPrecio);
 		modifArticulo.setStock(pStock);
-		rowAffect = catArticulo.UpdateElect(modifArticulo);
+		rowAffect = catArticulo.UpdateArticulo(modifArticulo);
 		return rowAffect;/*Devuelve la cantidad de filas afectadas por el update*/
 		
 	}
