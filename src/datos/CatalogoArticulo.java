@@ -50,7 +50,7 @@ public class CatalogoArticulo {
 				}
 				
 		}
-	public int UpdateElect (Articulo ArticuloUPD)
+	public int UpdateArticulo (Articulo ArticuloUPD)
 	{
 		String SQLCons= "UPDATE Articulos SET descrip_articulo=? , stock=? WHERE ?=cod_articulo ; UPDATE precio_articulos SET fecha_vigencia=? , valor=? WHERE ?=cod_articulo";
 		try{
