@@ -34,14 +34,15 @@ public class CatalogoLineaPedido {
 			return Statement.RETURN_GENERATED_KEYS;
 	}
 	
-	public void DeleteLineaPedido(int pId_LineaPedido)
+	public void DeleteLineaPedido(int pId_LineaPedido, int pId_Pedido)
 	{
-		String SQLCons= "DELETE FROM linea_pedidos where ?= id_linea";
+		String SQLCons= "DELETE FROM linea_pedidos where (?= id_linea AND ?=id_pedido)";
 		try {
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
 			stmt.setInt(1, pId_LineaPedido);
+			stmt.setInt(2, pId_Pedido);
 			int rta = stmt.executeUpdate();
 			
 					} catch (SQLException e) {
