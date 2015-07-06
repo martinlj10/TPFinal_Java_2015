@@ -38,14 +38,15 @@ public class ControladorLineaPedido {
 		public int UpdateLineaPedido(int pIdLinea, int pIdPedido, int pIdArticulo, int pCantidad, float pSubtotal)
 		{
 			int rowAffect;
+			CatalogoArticulo catArticulo = new CatalogoArticulo();
 			LineaPedido modifLineaPedido = new LineaPedido();
 			modifLineaPedido.setNroPedido(pIdPedido);
-			//modifLineaPedido.setArt; ver como setear articulo
+			modifLineaPedido.setArt(catArticulo.GetOne(pIdArticulo));
 			modifLineaPedido.setNroLinea(pIdLinea);
 			modifLineaPedido.setCantidad(pCantidad);
 			modifLineaPedido.setSub_total(pSubtotal);
 			rowAffect = catLineaPedido.UpdateLineaPedido(modifLineaPedido);
-			return rowAffect;/*Devuelve la cantidad de filas afectadas por el update*/
+			return rowAffect;
 			
 		}
 		

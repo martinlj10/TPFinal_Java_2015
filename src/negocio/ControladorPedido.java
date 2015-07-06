@@ -38,8 +38,9 @@ private CatalogoPedido catPedido = new CatalogoPedido();
 	{
 		int rowAffect;
 		Pedido modifPedido = new Pedido();
+		CatalogoCliente catCliente = new CatalogoCliente();
 		modifPedido.setNroPedido(pIdPedido);
-		//modifPedido.setCliente; ver como setear cliente
+		modifPedido.setCliente(catCliente.GetOne(pIdCliente));
 		modifPedido.setFechaPedido(pFecha_Pedido);
 		modifPedido.setFechaEntrega(pFecha_Entrega);
 		//modifPedido. incluir descuento
