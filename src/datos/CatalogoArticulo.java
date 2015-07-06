@@ -1,5 +1,6 @@
 package datos;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
@@ -100,8 +101,6 @@ public class CatalogoArticulo {
 		return ArticulosAll;
 	}
 
-
-
 	public Articulo GetOne(int pId)
 	{
 		
@@ -137,7 +136,27 @@ public class CatalogoArticulo {
 		return ArticuloDev;
 	}
 	
+	public int ActualizaPrecio(int pIdArticulo, float pNuevoPrecio, Date pFecha_vigencia)
+	{
+		String SQLCons= "UPDATE precio_Articulos SET valor=? , fecha_vigencia=? WHERE ?=id_articulo ";
+		try{
+			
+		ConexionBD conecta = new ConexionBD();
+		conecta.OpenConection();
+		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
+		stmt.setFloat(1, pNuevoPrecio);
+		stmt.setDate(2, pFecha_vigencia);
+		stmt.setInt(3, pIdArticulo);
+		int rta = stmt.executeUpdate();
+		}		
+				 catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return Statement.RETURN_GENERATED_KEYS;
+	}
+		
+	}
 	
 	
-	
-}
+
