@@ -48,7 +48,7 @@ public class CatalogoCliente {
 				}
 				
 		}
-	public int UpdateElect (Cliente ClienteUPD)
+	public int UpdateCliente (Cliente ClienteUPD)
 	{
 		String SQLCons= "UPDATE Clientes SET razon_social=? , alias=? , id_localidad=? WHERE ?=cod_cliente";
 		try{
