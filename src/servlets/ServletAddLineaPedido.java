@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelos.Articulo;
 import modelos.LineaPedido;
-
 import negocio.ControladorLineaPedido;
 
 
@@ -47,7 +47,9 @@ private static final long serialVersionUID = 1L;
 		nuevaLineaPedido.setNroPedido(Integer.parseInt(request.getParameter("id_pedido")));
 		nuevaLineaPedido.setNroLinea(Integer.parseInt(request.getParameter("nro_linea")));
 		nuevaLineaPedido.setCantidad(Integer.parseInt(request.getParameter("cantidad")));
-		//nuevaLineaPedido.setArt(); Ver como setear el articulo
+		Articulo ArticuloenPedido= new Articulo();
+		ArticuloenPedido.setCodigo_articulo(Integer.parseInt(request.getParameter("idArticulo")));
+		nuevaLineaPedido.setArt(ArticuloenPedido); //Ver si funciona
 		nuevaLineaPedido.setSub_total(Float.parseFloat(request.getParameter("subtotal")));
 		
 		try{

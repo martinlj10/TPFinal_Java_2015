@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -10,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelos.Cliente;
+import modelos.LineaPedido;
 import modelos.Pedido;
+import negocio.ControladorLineaPedido;
 import negocio.ControladorPedido;
 
 @WebServlet("/ServletAddPedido")
@@ -46,9 +50,11 @@ private static final long serialVersionUID = 1L;
 		nuevoPedido.setFechaPedido(java.sql.Date.valueOf((request.getParameter("fecha_pedido"))));
 		nuevoPedido.setIVA(Float.parseFloat(request.getParameter("IVA")));
 		nuevoPedido.setEstado(request.getParameter("estado"));
-		//nuevoPedido.setDetalles(detalles); ver como recuperar la lista de lineas pedidos
-		//nuevoPedido.setCliente(cliente); ver como recuperar el cliente
-		
+		Cliente ClientePedido = new Cliente();
+		ClientePedido.setId_cliente(Integer.parseInt(request.getParameter("idCliente")));
+		nuevoPedido.setCliente(ClientePedido);//ver si fuciona 
+		//nuevoPedido.setDetalles(detalles); ver como recuperar la lista de lineas pedidos -- es necesario? si el insert se hace con la linea de pedido
+				
 		try{
 		controladorPedido.AddPedido(nuevoPedido);
 		response.sendRedirect("/ListaPedidos.jsp");/*Redirige a la lista completa de Pedidos*/
