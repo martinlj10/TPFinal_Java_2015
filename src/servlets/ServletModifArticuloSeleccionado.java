@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelos.Articulo;
+import modelos.Auto;
 import negocio.ControladorArticulo;
 
 /**
@@ -46,7 +46,7 @@ public class ServletModifArticuloSeleccionado extends HttpServlet{
 				
 		int pID =Integer.parseInt(request.getParameter("idArticuloSelected"));
 		
-		Articulo articuloSelect =controladorArticulo.getOne(pID);
+		Auto articuloSelect =controladorArticulo.getOne(pID);
 		
 		request.setAttribute("electroSelect", articuloSelect);
 		

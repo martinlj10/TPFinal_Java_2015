@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelos.Cliente;
+import modelos.Comentario;
 import modelos.LineaPedido;
 import modelos.Pedido;
 import negocio.ControladorLineaPedido;
@@ -50,7 +50,7 @@ private static final long serialVersionUID = 1L;
 		nuevoPedido.setFechaPedido(java.sql.Date.valueOf((request.getParameter("fecha_pedido"))));
 		nuevoPedido.setIVA(Float.parseFloat(request.getParameter("IVA")));
 		nuevoPedido.setEstado(request.getParameter("estado"));
-		Cliente ClientePedido = new Cliente();
+		Comentario ClientePedido = new Comentario();
 		ClientePedido.setId_cliente(Integer.parseInt(request.getParameter("idCliente")));
 		nuevoPedido.setCliente(ClientePedido);//ver si fuciona 
 		//nuevoPedido.setDetalles(detalles); ver como recuperar la lista de lineas pedidos -- es necesario? si el insert se hace con la linea de pedido

@@ -6,11 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import modelos.Cliente;
+import modelos.Comentario;
 
 public class CatalogoCliente {
 	
-	public int AddCliente(Cliente newCliente)
+	public int AddCliente(Comentario newCliente)
 	{
 		try{
 			//Agrega un articulo a la Tabla Clientes 
@@ -48,7 +48,7 @@ public class CatalogoCliente {
 				}
 				
 		}
-	public int UpdateCliente (Cliente ClienteUPD)
+	public int UpdateCliente (Comentario ClienteUPD)
 	{
 		String SQLCons= "UPDATE Clientes SET razon_social=? , alias=? , id_localidad=? WHERE ?=cod_cliente";
 		try{
@@ -71,9 +71,9 @@ public class CatalogoCliente {
 	}
 
 
-	public ArrayList<Cliente> GetAll()
+	public ArrayList<Comentario> GetAll()
 	{
-	ArrayList<Cliente> ClientesAll = new ArrayList<Cliente>();
+	ArrayList<Comentario> ClientesAll = new ArrayList<Comentario>();
 		
 		try {
 			String SQLCons= "Select cod_cliente, razon_social, alias, nombre_localidad, descrip_zona FROM Clientes INNER JOIN localidades ON clientes.id_localidad = localidades.id_localidad INNER JOIN zonas ON localidades.id_zona =zonas.id_zona ORDER BY razon_social";
@@ -82,7 +82,7 @@ public class CatalogoCliente {
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
 			ResultSet rta = stmt.executeQuery();
 			 	while(rta.next())
-						{		Cliente ClienteDev = new Cliente();
+						{		Comentario ClienteDev = new Comentario();
 					 			ClienteDev.setId_cliente(rta.getInt("cod_cliente"));
 								ClienteDev.setRazon_social(rta.getString("razon_social"));						
 								ClienteDev.setAlias(rta.getString("alias"));
@@ -100,10 +100,10 @@ public class CatalogoCliente {
 
 
 
-	public Cliente GetOne(int pIdCliente)
+	public Comentario GetOne(int pIdCliente)
 	{
 		
-		Cliente ClienteDev = new Cliente();
+		Comentario ClienteDev = new Comentario();
 		try{
 			
 		 

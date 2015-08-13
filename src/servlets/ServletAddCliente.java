@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelos.Articulo;
-import modelos.Cliente;
+import modelos.Auto;
+import modelos.Comentario;
 import negocio.ControladorArticulo;
 import negocio.ControladorCliente;
 
@@ -42,7 +42,7 @@ private static final long serialVersionUID = 1L;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		ControladorCliente controladorCliente =(ControladorCliente)session.getAttribute("controladorCliente");
-		Cliente nuevoCliente = new Cliente();
+		Comentario nuevoCliente = new Comentario();
 		nuevoCliente.setAlias(request.getParameter("alias").toUpperCase());
 		nuevoCliente.setId_cliente(Integer.parseInt(request.getParameter("id_cliente")));
 		nuevoCliente.setId_localidad(Integer.parseInt(request.getParameter("id_localidad")));

@@ -7,11 +7,11 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
 
-import modelos.Articulo;
+import modelos.Auto;
 
 public class CatalogoArticulo {
 
-	public int AddArticulo(Articulo Articulo)
+	public int AddArticulo(Auto Articulo)
 	{ //se cargan los articulos
 		try{
 			//Agrega un articulo a la Tabla Articulos y tambien agrega el precio del articulo con la fecha de vigencia en la tabla Precios_Articulos
@@ -51,7 +51,7 @@ public class CatalogoArticulo {
 				}
 				
 		}
-	public int UpdateArticulo (Articulo ArticuloUPD)
+	public int UpdateArticulo (Auto ArticuloUPD)
 	{
 		String SQLCons= "UPDATE Articulos SET descrip_articulo=? , stock=? WHERE ?=cod_articulo ; UPDATE precio_articulos SET fecha_vigencia=? , valor=? WHERE ?=cod_articulo";
 		try{
@@ -75,9 +75,9 @@ public class CatalogoArticulo {
 	}
 
 
-	public ArrayList<Articulo> GetAll()
+	public ArrayList<Auto> GetAll()
 	{
-	ArrayList<Articulo> ArticulosAll = new ArrayList<Articulo>();
+	ArrayList<Auto> ArticulosAll = new ArrayList<Auto>();
 		
 		try {
 			String SQLCons= "Select cod_articulo, descrip_articulo, stock, fecha_vigencia, valor FROM Articulos INNER JOIN Precio_Articulos ON cod_articulo = id_articulo ORDER BY descrip_articulo";
@@ -86,7 +86,7 @@ public class CatalogoArticulo {
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
 			ResultSet rta = stmt.executeQuery();
 			 	while(rta.next())
-						{		Articulo ArticuloDev = new Articulo();
+						{		Auto ArticuloDev = new Auto();
 					 			ArticuloDev.setDescripcionArticulo(rta.getString("descrip_articulo"));
 								ArticuloDev.setStock(rta.getInt("stock"));						
 								ArticuloDev.setFechaDesde_precio(rta.getDate("fecha_vigencia"));
@@ -101,10 +101,10 @@ public class CatalogoArticulo {
 		return ArticulosAll;
 	}
 
-	public Articulo GetOne(int pId)
+	public Auto GetOne(int pId)
 	{
 		
-		Articulo ArticuloDev = new Articulo();
+		Auto ArticuloDev = new Auto();
 		try{
 			
 		 

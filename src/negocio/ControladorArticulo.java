@@ -8,7 +8,7 @@ public class ControladorArticulo {
 	
 	private CatalogoArticulo catArticulo = new CatalogoArticulo();
 	
-	public int AddArticulo(Articulo nuevoArticulo)
+	public int AddArticulo(Auto nuevoArticulo)
 	{
 		//Validaciones de Negocio
 		
@@ -24,9 +24,9 @@ public class ControladorArticulo {
 		
 	}
 
-	public Articulo getOne(int pIdArticulo)
+	public Auto getOne(int pIdArticulo)
 	{
-		Articulo ArticuloDev = new Articulo();/*Crea la estructura del articulo a devolver*/
+		Auto ArticuloDev = new Auto();/*Crea la estructura del articulo a devolver*/
 		ArticuloDev = catArticulo.GetOne(pIdArticulo);/*Obtiene el articulo a devolver por Id*/
 		
 		return ArticuloDev;
@@ -35,7 +35,7 @@ public class ControladorArticulo {
 	public int UpdateArticulo(int pCodArt, String pDescripcion, int pStock, Date pFecha_precio, float pPrecio)
 	{
 		int rowAffect;
-		Articulo modifArticulo = new Articulo();
+		Auto modifArticulo = new Auto();
 		modifArticulo.setDescripcionArticulo(pDescripcion);
 		modifArticulo.setCodigo_articulo(pCodArt);
 		modifArticulo.setFechaDesde_precio(pFecha_precio);
@@ -46,9 +46,9 @@ public class ControladorArticulo {
 		
 	}
 	
-	public ArrayList<Articulo> getAll()
+	public ArrayList<Auto> getAll()
 	{
-		ArrayList<Articulo> ArticulosAll = new ArrayList<Articulo>();
+		ArrayList<Auto> ArticulosAll = new ArrayList<Auto>();
 		ArticulosAll = catArticulo.GetAll();
 		
 		return ArticulosAll;

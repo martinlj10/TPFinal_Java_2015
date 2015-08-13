@@ -11,7 +11,7 @@ public class ControladorCliente {
 
 	private CatalogoCliente catCliente = new CatalogoCliente();
 	
-	public int AddCliente(Cliente nuevoCliente)
+	public int AddCliente(Comentario nuevoCliente)
 	{
 		//Validaciones de Negocio
 		
@@ -27,9 +27,9 @@ public class ControladorCliente {
 		
 	}
 
-	public Cliente getOne(int pIdCliente)
+	public Comentario getOne(int pIdCliente)
 	{
-		Cliente ClienteDev = new Cliente();/*Crea la estructura del Cliente a devolver*/
+		Comentario ClienteDev = new Comentario();/*Crea la estructura del Cliente a devolver*/
 		ClienteDev = catCliente.GetOne(pIdCliente);/*Obtiene el Cliente a devolver por Id*/
 		
 		return ClienteDev;
@@ -38,7 +38,7 @@ public class ControladorCliente {
 	public int UpdateCliente(int pCliente, String pAlias, int pIdLocalidad, String pLocalidad, String pRazon_Social, String pZona)
 	{
 		int rowAffect;
-		Cliente modifCliente = new Cliente();
+		Comentario modifCliente = new Comentario();
 		modifCliente.setAlias(pAlias);
 		modifCliente.setId_cliente(pCliente);
 		modifCliente.setId_localidad(pIdLocalidad);
@@ -50,9 +50,9 @@ public class ControladorCliente {
 		
 	}
 	
-	public ArrayList<Cliente> getAll()
+	public ArrayList<Comentario> getAll()
 	{
-		ArrayList<Cliente> ClienteAll = new ArrayList<Cliente>();
+		ArrayList<Comentario> ClienteAll = new ArrayList<Comentario>();
 		ClienteAll = catCliente.GetAll();
 		
 		return ClienteAll;

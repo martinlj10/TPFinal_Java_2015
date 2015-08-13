@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelos.Cliente;
+import modelos.Comentario;
 import negocio.ControladorCliente;
 
 /**
@@ -42,7 +42,7 @@ public class ServletSeleccionCliente extends HttpServlet{
 	
 		HttpSession session=request.getSession();
 		ControladorCliente controlador=(ControladorCliente)session.getAttribute("controlador");
-		Cliente cli=controlador.getOne(Integer.parseInt(request.getParameter("idCliente")));
+		Comentario cli=controlador.getOne(Integer.parseInt(request.getParameter("idCliente")));
 		//continuar
 // TODO Auto-generated method stub
 	}

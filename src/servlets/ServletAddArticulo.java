@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelos.Articulo;
+import modelos.Auto;
 import negocio.ControladorArticulo;;
 
 @WebServlet("/ServletAddArticulo")
@@ -38,7 +38,7 @@ public class ServletAddArticulo extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		ControladorArticulo controladorArticulo =(ControladorArticulo)session.getAttribute("controladorArticulo");
-		Articulo nuevoArticulo = new Articulo();
+		Auto nuevoArticulo = new Auto();
 		nuevoArticulo.setCodigo_articulo(Integer.parseInt(request.getParameter("cod_articulo")));
 		nuevoArticulo.setDescripcionArticulo(request.getParameter("descripcion").toUpperCase());
 		nuevoArticulo.setFechaDesde_precio(java.sql.Date.valueOf((request.getParameter("fechaDesde_precio"))));
