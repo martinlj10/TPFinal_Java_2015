@@ -6,7 +6,7 @@ import datos.*;
 import java.sql.*;
 public class ControladorArticulo {
 	
-	private CatalogoArticulo catArticulo = new CatalogoArticulo();
+	private CatalogoAuto catArticulo = new CatalogoAuto();
 	
 	public int AddArticulo(Auto nuevoArticulo)
 	{

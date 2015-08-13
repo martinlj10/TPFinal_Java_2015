@@ -38,7 +38,7 @@ public class ControladorLineaPedido {
 		public int UpdateLineaPedido(int pIdLinea, int pIdPedido, int pIdArticulo, int pCantidad, float pSubtotal)
 		{
 			int rowAffect;
-			CatalogoArticulo catArticulo = new CatalogoArticulo();
+			CatalogoAuto catArticulo = new CatalogoAuto();
 			LineaPedido modifLineaPedido = new LineaPedido();
 			modifLineaPedido.setNroPedido(pIdPedido);
 			modifLineaPedido.setArt(catArticulo.GetOne(pIdArticulo));

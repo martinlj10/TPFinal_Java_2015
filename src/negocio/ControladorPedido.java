@@ -38,7 +38,7 @@ private CatalogoPedido catPedido = new CatalogoPedido();
 	{
 		int rowAffect;
 		Pedido modifPedido = new Pedido();
-		CatalogoCliente catCliente = new CatalogoCliente();
+		CatalogoComentario catCliente = new CatalogoComentario();
 		modifPedido.setNroPedido(pIdPedido);
 		modifPedido.setCliente(catCliente.GetOne(pIdCliente));
 		modifPedido.setFechaPedido(pFecha_Pedido);

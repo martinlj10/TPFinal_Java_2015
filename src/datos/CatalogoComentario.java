@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import modelos.Comentario;
 
-public class CatalogoCliente {
+public class CatalogoComentario {
 	
 	public int AddCliente(Comentario newCliente)
 	{

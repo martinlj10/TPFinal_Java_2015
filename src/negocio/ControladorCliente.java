@@ -9,7 +9,7 @@ import java.sql.*;
 
 public class ControladorCliente {
 
-	private CatalogoCliente catCliente = new CatalogoCliente();
+	private CatalogoComentario catCliente = new CatalogoComentario();
 	
 	public int AddCliente(Comentario nuevoCliente)
 	{

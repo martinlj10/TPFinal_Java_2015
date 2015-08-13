@@ -9,7 +9,7 @@ import java.util.*;
 
 import modelos.Auto;
 
-public class CatalogoArticulo {
+public class CatalogoAuto {
 
 	public int AddArticulo(Auto Articulo)
 	{ //se cargan los articulos
