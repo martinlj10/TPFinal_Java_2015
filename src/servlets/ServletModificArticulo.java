@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import negocio.ControladorArticulo;
+import negocio.ControladorAuto;
 
 /**
  * ESTE ES EL QUE MODIFICA
@@ -40,7 +40,7 @@ public class ServletModificArticulo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		ControladorArticulo controladorArticulo =(ControladorArticulo)session.getAttribute("controladorArticulo");
+		ControladorAuto controladorArticulo =(ControladorAuto)session.getAttribute("controladorArticulo");
 		
 		int pID=Integer.parseInt(request.getParameter("cod_articulo"));
 		String pDescripcion =request.getParameter("descripcion").toUpperCase();
@@ -50,7 +50,7 @@ public class ServletModificArticulo extends HttpServlet {
 		
 		
 		try{
-			controladorArticulo.UpdateArticulo(pID, pDescripcion, pStock, pFechaDesde, pPrecio);
+			controladorArticulo.UpdateAuto(pID, pDescripcion, pStock, pFechaDesde, pPrecio);
 		response.sendRedirect("/ModificacionArticuloExitosa.jsp"); //Vista no Creada
 		}
 		catch(Exception e)

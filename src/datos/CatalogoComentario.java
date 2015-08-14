@@ -1,5 +1,6 @@
 package datos;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,19 +10,19 @@ import java.util.ArrayList;
 import modelos.Comentario;
 
 public class CatalogoComentario {
-	
-	public int AddCliente(Comentario newCliente)
+	private final static String CAMPOS = " cod_auto, cod_auto, fecha_public, comentario";
+	public static int AddComentario(Comentario newComentario)
 	{
 		try{
-			//Agrega un articulo a la Tabla Clientes 
-		String SQLCons= "INSERT INTO Clientes (cod_cliente,razon_social, alias, id_localidad)"+ " VALUES (?,?,?,?)";
+			//Agrega un comentario a la Tabla Comentarios 
+		String SQLCons= "INSERT INTO comentario ("+CAMPOS+")"+ " VALUES (?,?,?,?)";
 	ConexionBD conecta = new ConexionBD();
 	conecta.OpenConection();
 	PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
-	stmt.setInt(1,newCliente.getId_cliente());
-	stmt.setString(2, newCliente.getRazon_social());
-	stmt.setString(3, newCliente.getAlias());
-	stmt.setInt(4, newCliente.getId_localidad());
+	stmt.setInt(1,newComentario.getCod_auto());
+	stmt.setInt(2, newComentario.getCod_auto());
+	stmt.setDate(3, newComentario.getFecha_public());
+	stmt.setString(4, newComentario.getComentario());
 	
 	stmt.execute();
 	
@@ -32,14 +33,16 @@ public class CatalogoComentario {
 									}
 			return Statement.RETURN_GENERATED_KEYS;
 	}
-	public void DeleteCliente(int pId_cliente)
+	public static void DeleteComentario(int pCod_Auto, int pCod_Usuario, Date pFecha_public)
 	{
-		String SQLCons= "DELETE FROM Articulos where ?= cod_cliente";
+		String SQLCons= "DELETE FROM comentario where (?= cod_cliente AND ?=cod_usuario AND ?=fecha_public)";
 		try {
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
-			stmt.setInt(1, pId_cliente);
+			stmt.setInt(1, pCod_Auto);
+			stmt.setInt(1, pCod_Usuario);
+			stmt.setDate(1, pFecha_public);
 			int rta = stmt.executeUpdate();
 			
 					} catch (SQLException e) {
@@ -48,18 +51,18 @@ public class CatalogoComentario {
 				}
 				
 		}
-	public int UpdateCliente (Comentario ClienteUPD)
+	public static int UpdateComentario (Comentario ComentarioUPD)
 	{
-		String SQLCons= "UPDATE Clientes SET razon_social=? , alias=? , id_localidad=? WHERE ?=cod_cliente";
+		String SQLCons= "UPDATE Comentario SET comentario=? WHERE (?=cod_auto AND ?= cod_usuario, ?=fecha_public)";
 		try{
 			
 		ConexionBD conecta = new ConexionBD();
 		conecta.OpenConection();
 		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
-		stmt.setString(1, ClienteUPD.getRazon_social());
-		stmt.setString(2, ClienteUPD.getAlias());
-		stmt.setInt(3, ClienteUPD.getId_localidad());
-		stmt.setInt(4, ClienteUPD.getId_cliente());
+		stmt.setString(1, ComentarioUPD.getComentario());
+		stmt.setInt(2, ComentarioUPD.getCod_auto());
+		stmt.setInt(3, ComentarioUPD.getCod_usuario());
+		stmt.setDate(4, ComentarioUPD.getFecha_public());
 		
 		int rta = stmt.executeUpdate();
 		}		
@@ -71,68 +74,31 @@ public class CatalogoComentario {
 	}
 
 
-	public ArrayList<Comentario> GetAll()
-	{
-	ArrayList<Comentario> ClientesAll = new ArrayList<Comentario>();
+	public static ArrayList<Comentario> GetAll(int pCodAuto)
+	{//Devuelve todos los comentarios sobre un Auto en particular
+	ArrayList<Comentario> ComentariosAll = new ArrayList<Comentario>();
 		
 		try {
-			String SQLCons= "Select cod_cliente, razon_social, alias, nombre_localidad, descrip_zona FROM Clientes INNER JOIN localidades ON clientes.id_localidad = localidades.id_localidad INNER JOIN zonas ON localidades.id_zona =zonas.id_zona ORDER BY razon_social";
+			String SQLCons= "Select "+CAMPOS+" FROM Comentario WHERE cod_usuario = ? ORDER BY fecha_public";
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
+			stmt.setInt(1, pCodAuto);
 			ResultSet rta = stmt.executeQuery();
 			 	while(rta.next())
-						{		Comentario ClienteDev = new Comentario();
-					 			ClienteDev.setId_cliente(rta.getInt("cod_cliente"));
-								ClienteDev.setRazon_social(rta.getString("razon_social"));						
-								ClienteDev.setAlias(rta.getString("alias"));
-								ClienteDev.setLocalidad(rta.getString("nombre_localidad"));
-								ClienteDev.setZona(rta.getString("descrip_zona"));
-								ClientesAll.add(ClienteDev);
+						{		Comentario comentarioDev = new Comentario();
+					 			comentarioDev.setCod_auto(rta.getInt("cod_auto"));
+								comentarioDev.setCod_usuario(rta.getInt("cod_usuario"));						
+								comentarioDev.setFecha_public(rta.getDate("fecha_public"));
+								comentarioDev.setComentario(rta.getString("comentario"));
+								ComentariosAll.add(comentarioDev);
 								
 				}
 		}catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		return ClientesAll;
-	}
-
-
-
-	public Comentario GetOne(int pIdCliente)
-	{
-		
-		Comentario ClienteDev = new Comentario();
-		try{
-			
-		 
-		
-		String SQLCons= "SELECT * FROM Clientes INNER JOIN localidades ON clientes.id_localidad=localidades.id_localidad INNER JOIN zonas ON zonas.id_zona=localidades.id_zona WHERE Clientes.cod_Cliente=?";
-		ConexionBD conecta = new ConexionBD();
-		conecta.OpenConection();
-		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
-		stmt.setInt(1, pIdCliente);		
-		ResultSet rta = stmt.executeQuery();
-		while(rta.next())
-		{
-			ClienteDev.setId_cliente(rta.getInt("cod_cliente"));
-			ClienteDev.setRazon_social(rta.getString("razon_social"));						
-			ClienteDev.setAlias(rta.getString("alias"));
-			ClienteDev.setLocalidad(rta.getString("nombre_localidad"));
-			ClienteDev.setZona(rta.getString("descrip_zona"));
-						
-		}
-					rta.close();
-					stmt.close();
-						
-						
-						} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						
-								}
-		return ClienteDev;
+		return ComentariosAll;
 	}
 
 	

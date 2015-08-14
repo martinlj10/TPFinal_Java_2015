@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import modelos.Auto;
-import negocio.ControladorArticulo;
+import negocio.ControladorAuto;
 
 /**
  * ESTE ES EL QUE OBTIENE EL OBJETO SELECCIONADO Y REDIRIGE A LA VENTANA DE MODIFICACION
@@ -42,7 +42,7 @@ public class ServletModifArticuloSeleccionado extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		ControladorArticulo controladorArticulo =(ControladorArticulo)session.getAttribute("controladorArticulo");
+		ControladorAuto controladorArticulo =(ControladorAuto)session.getAttribute("controladorArticulo");
 				
 		int pID =Integer.parseInt(request.getParameter("idArticuloSelected"));
 		

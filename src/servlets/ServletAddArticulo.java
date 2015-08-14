@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import modelos.Auto;
-import negocio.ControladorArticulo;;
+import negocio.ControladorAuto;;
 
 @WebServlet("/ServletAddArticulo")
 public class ServletAddArticulo extends HttpServlet {
@@ -37,7 +37,7 @@ public class ServletAddArticulo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		ControladorArticulo controladorArticulo =(ControladorArticulo)session.getAttribute("controladorArticulo");
+		ControladorAuto controladorArticulo =(ControladorAuto)session.getAttribute("controladorArticulo");
 		Auto nuevoArticulo = new Auto();
 		nuevoArticulo.setCodigo_articulo(Integer.parseInt(request.getParameter("cod_articulo")));
 		nuevoArticulo.setDescripcionArticulo(request.getParameter("descripcion").toUpperCase());
@@ -47,7 +47,7 @@ public class ServletAddArticulo extends HttpServlet {
 		
 		
 		try{
-		controladorArticulo.AddArticulo(nuevoArticulo);
+		controladorArticulo.AddAuto(nuevoArticulo);
 		response.sendRedirect("/ListaArticulos.jsp");/*Redirige a la lista completa de articulos*/
 		}
 		catch(Exception e)

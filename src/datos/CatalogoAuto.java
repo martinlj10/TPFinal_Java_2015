@@ -11,20 +11,23 @@ import modelos.Auto;
 
 public class CatalogoAuto {
 
-	public int AddArticulo(Auto Articulo)
-	{ //se cargan los articulos
+	private final static String CAMPOS = " cod_auto, descripcion, precio_sug, valoracion, nombre_auto, cod_marca, ano_fabric";
+	public static int AddAuto(Auto Auto)
+	{ //se cargan los autos
 		try{
+			
 			//Agrega un articulo a la Tabla Articulos y tambien agrega el precio del articulo con la fecha de vigencia en la tabla Precios_Articulos
-		String SQLCons= "INSERT INTO Articulos (cod_articulo,descrip_articulo, stock)"+ " VALUES (?,?,?); INSERT INTO precio_articulos (id_articulo,fecha_vigencia, valor)"+ " VALUES (?,?,?)" ;
+		String SQLCons= "INSERT INTO Auto ("+CAMPOS+") VALUES (?,?,?,?,?,?,?)"; 
 	ConexionBD conecta = new ConexionBD();
 	conecta.OpenConection();
 	PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
-	stmt.setInt(1,Articulo.getCodigo_articulo());
-	stmt.setString(2, Articulo.getDescripcionArticulo());
-	stmt.setFloat(3, Articulo.getStock());
-	stmt.setInt(4, Articulo.getCodigo_articulo());
-	stmt.setDate(5, Articulo.getFechaDesde_precio());
-	stmt.setFloat(6, Articulo.getPrecio());
+	stmt.setInt(1,Auto.getCod_auto());
+	stmt.setString(2, Auto.getDescripcionAuto());
+	stmt.setFloat(3, Auto.getPrecio());
+	stmt.setInt(4, Auto.getValoracion());
+	stmt.setString(5, Auto.getNombre_auto());
+	stmt.setInt(6, Auto.getCod_marca());
+	stmt.setInt(7, Auto.getAnoFabricacion());
 	
 	stmt.execute();
 	
@@ -35,14 +38,14 @@ public class CatalogoAuto {
 									}
 			return Statement.RETURN_GENERATED_KEYS;
 	}
-	public void DeleteArticulo(int pCod_arti)
+	public static void DeleteAuto(int pCod_Auto)
 	{
-		String SQLCons= "DELETE FROM Articulos where ?= cod_articulo";
+		String SQLCons= "DELETE FROM Auto where ? = cod_auto";
 		try {
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
-			stmt.setInt(1, pCod_arti);
+			stmt.setInt(1, pCod_Auto);
 			int rta = stmt.executeUpdate();
 			
 					} catch (SQLException e) {
@@ -51,20 +54,22 @@ public class CatalogoAuto {
 				}
 				
 		}
-	public int UpdateArticulo (Auto ArticuloUPD)
+	public static int UpdateAuto (Auto AutoUPD)
 	{
-		String SQLCons= "UPDATE Articulos SET descrip_articulo=? , stock=? WHERE ?=cod_articulo ; UPDATE precio_articulos SET fecha_vigencia=? , valor=? WHERE ?=cod_articulo";
+		String SQLCons= "UPDATE Auto SET descripcion=? , precio_sug=?, valoracion=?, nombre_auto=?, cod_marca=?, ano_fabric=? WHERE ?=cod_auto ";
 		try{
 			
 		ConexionBD conecta = new ConexionBD();
 		conecta.OpenConection();
 		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
-		stmt.setString(1, ArticuloUPD.getDescripcionArticulo());
-		stmt.setInt(2, ArticuloUPD.getStock());
-		stmt.setInt(3, ArticuloUPD.getCodigo_articulo());
-		stmt.setDate(4, ArticuloUPD.getFechaDesde_precio());
-		stmt.setFloat(5, ArticuloUPD.getPrecio());
-		stmt.setInt(6, ArticuloUPD.getCodigo_articulo());
+		stmt.setString(1, AutoUPD.getDescripcionAuto());
+		stmt.setFloat(2, AutoUPD.getPrecio());
+		stmt.setInt(3, AutoUPD.getValoracion());
+		stmt.setString(4, AutoUPD.getNombre_auto());
+		stmt.setInt(5, AutoUPD.getCod_marca());
+		stmt.setInt(6, AutoUPD.getAnoFabricacion());
+		stmt.setInt(7, AutoUPD.getCod_auto());
+		
 		int rta = stmt.executeUpdate();
 		}		
 				 catch (SQLException e) {
@@ -75,41 +80,45 @@ public class CatalogoAuto {
 	}
 
 
-	public ArrayList<Auto> GetAll()
+	public static ArrayList<Auto> GetAll()
 	{
-	ArrayList<Auto> ArticulosAll = new ArrayList<Auto>();
+	ArrayList<Auto> AutosAll = new ArrayList<Auto>();
 		
 		try {
-			String SQLCons= "Select cod_articulo, descrip_articulo, stock, fecha_vigencia, valor FROM Articulos INNER JOIN Precio_Articulos ON cod_articulo = id_articulo ORDER BY descrip_articulo";
+			String SQLCons= "Select "+CAMPOS+" FROM Auto";
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
 			ResultSet rta = stmt.executeQuery();
 			 	while(rta.next())
-						{		Auto ArticuloDev = new Auto();
-					 			ArticuloDev.setDescripcionArticulo(rta.getString("descrip_articulo"));
-								ArticuloDev.setStock(rta.getInt("stock"));						
-								ArticuloDev.setFechaDesde_precio(rta.getDate("fecha_vigencia"));
-								ArticuloDev.setPrecio(rta.getFloat("precio")); 
-								ArticulosAll.add(ArticuloDev);
+						{		Auto AutoDev = new Auto();
+					 			AutoDev.setDescripcionAuto(rta.getString("descripcion"));
+					 			AutoDev.setCod_auto(rta.getInt("cod_auto"));
+								AutoDev.setPrecio(rta.getFloat("precio_sug"));						
+								AutoDev.setValoracion(rta.getInt("valoracion"));
+								AutoDev.setNombre_auto(rta.getString("nombre_auto"));
+								AutoDev.setCod_marca(rta.getInt("cod_marca"));
+								AutoDev.setAnoFabricacion(rta.getInt("ano_fabric"));
+								
+								AutosAll.add(AutoDev);
 								
 				}
 		}catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		return ArticulosAll;
+		return AutosAll;
 	}
 
-	public Auto GetOne(int pId)
+	public static Auto GetOne(int pId)
 	{
 		
-		Auto ArticuloDev = new Auto();
+		Auto AutoDev = new Auto();
 		try{
 			
 		 
 		
-		String SQLCons= "SELECT * FROM Articulos INNER JOIN Precio_articulos ON cod_articulo=id_articulo WHERE Articulos.cod_articulo=?";
+		String SQLCons= "SELECT "+CAMPOS+" FROM Auto WHERE cod_auto=?";
 		ConexionBD conecta = new ConexionBD();
 		conecta.OpenConection();
 		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
@@ -117,12 +126,13 @@ public class CatalogoAuto {
 		ResultSet rta = stmt.executeQuery();
 		while(rta.next())
 		{
-						ArticuloDev.setDescripcionArticulo(rta.getString("descrip_articulo"));
-					    ArticuloDev.setStock(rta.getInt("stock"));
-						ArticuloDev.setFechaDesde_precio(rta.getDate("fecha_vigencia"));
-						ArticuloDev.setCodigo_articulo(rta.getInt("id_articulo"));
-						ArticuloDev.setPrecio(rta.getFloat("valor"));
-						
+					AutoDev.setDescripcionAuto(rta.getString("descripcion"));
+		 			AutoDev.setCod_auto(rta.getInt("cod_auto"));
+					AutoDev.setPrecio(rta.getFloat("precio_sug"));						
+					AutoDev.setValoracion(rta.getInt("valoracion"));
+					AutoDev.setNombre_auto(rta.getString("nombre_auto"));
+					AutoDev.setCod_marca(rta.getInt("cod_marca"));
+					AutoDev.setAnoFabricacion(rta.getInt("ano_fabric"));
 		}
 					rta.close();
 					stmt.close();
@@ -133,20 +143,19 @@ public class CatalogoAuto {
 						e.printStackTrace();
 						
 								}
-		return ArticuloDev;
+		return AutoDev;
 	}
 	
-	public int ActualizaPrecio(int pIdArticulo, float pNuevoPrecio, Date pFecha_vigencia)
+	public static int ActualizaValoracion(int pIdCod_Auto, int pValoracion)
 	{
-		String SQLCons= "UPDATE precio_Articulos SET valor=? , fecha_vigencia=? WHERE ?=id_articulo ";
+		String SQLCons= "UPDATE auto SET valoracion=?  WHERE ?=cod_auto ";
 		try{
 			
 		ConexionBD conecta = new ConexionBD();
 		conecta.OpenConection();
 		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
-		stmt.setFloat(1, pNuevoPrecio);
-		stmt.setDate(2, pFecha_vigencia);
-		stmt.setInt(3, pIdArticulo);
+		stmt.setFloat(1, pValoracion);
+		stmt.setInt(2, pIdCod_Auto);
 		int rta = stmt.executeUpdate();
 		}		
 				 catch (SQLException e) {

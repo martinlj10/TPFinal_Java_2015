@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import modelos.Auto;
 import modelos.Comentario;
-import negocio.ControladorArticulo;
-import negocio.ControladorCliente;
+import negocio.ControladorAuto;
+import negocio.ControladorComentario;
 
 @WebServlet("/ServletAddCliente")
 
@@ -41,7 +41,7 @@ private static final long serialVersionUID = 1L;
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		ControladorCliente controladorCliente =(ControladorCliente)session.getAttribute("controladorCliente");
+		ControladorComentario controladorCliente =(ControladorComentario)session.getAttribute("controladorCliente");
 		Comentario nuevoCliente = new Comentario();
 		nuevoCliente.setAlias(request.getParameter("alias").toUpperCase());
 		nuevoCliente.setId_cliente(Integer.parseInt(request.getParameter("id_cliente")));

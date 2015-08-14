@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import modelos.Comentario;
-import negocio.ControladorCliente;
+import negocio.ControladorComentario;
 
 /**
  * Servlet implementation class ServletSeleccionCliente
@@ -41,7 +41,7 @@ public class ServletSeleccionCliente extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		HttpSession session=request.getSession();
-		ControladorCliente controlador=(ControladorCliente)session.getAttribute("controlador");
+		ControladorComentario controlador=(ControladorComentario)session.getAttribute("controlador");
 		Comentario cli=controlador.getOne(Integer.parseInt(request.getParameter("idCliente")));
 		//continuar
 // TODO Auto-generated method stub

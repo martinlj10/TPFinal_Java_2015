@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import negocio.ControladorArticulo;;
+import negocio.ControladorAuto;;
 
 /**
  * Servlet implementation class ServletBajaArticulo
@@ -42,9 +42,9 @@ public class ServletBajaArticulo extends HttpServlet {
 		
 		HttpSession session=request.getSession();
 		
-		ControladorArticulo controlador = (ControladorArticulo)session.getAttribute("controladorArticulo");
+		ControladorAuto controlador = (ControladorAuto)session.getAttribute("controladorArticulo");
 		int vIdArticulo = Integer.parseInt(request.getParameter("idArticulo"));
-		controlador.DeleteArticulo(vIdArticulo);
+		controlador.DeleteAuto(vIdArticulo);
 		response.sendRedirect("/ListaArticulos.jsp");/*Vista no creada*/
 		
 		

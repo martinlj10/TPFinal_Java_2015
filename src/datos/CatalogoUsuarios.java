@@ -10,7 +10,7 @@ public class CatalogoUsuarios {
 
 
 
-	public Usuario GetOne(String pUsername, String pPassword)
+	public static Usuario GetOne(String pUsername, String pPassword)
 	{
 		
 		Usuario userBD = new Usuario();

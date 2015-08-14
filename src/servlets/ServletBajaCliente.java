@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-import negocio.ControladorCliente;
+import negocio.ControladorComentario;
 
 /**
  * Servlet implementation class ServletBajaCliente
@@ -44,9 +44,9 @@ private static final long serialVersionUID = 1L;
 		
 		HttpSession session=request.getSession();
 		
-		ControladorCliente controlador = (ControladorCliente)session.getAttribute("controladorCliente");
+		ControladorComentario controlador = (ControladorComentario)session.getAttribute("controladorCliente");
 		int vIdCliente = Integer.parseInt(request.getParameter("idCliente"));
-		controlador.DeleteCliente(vIdCliente);
+		controlador.DeleteComentario(vIdCliente);
 		response.sendRedirect("/ListaClientes.jsp");/*Vista no creada*/
 		
 		
