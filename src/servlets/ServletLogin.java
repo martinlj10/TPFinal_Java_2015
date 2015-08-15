@@ -4,10 +4,12 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 
 /*import negocio.ControladorElectrodomesticoNegocio;*/ //importar controlador de los elementos a manejar
 import negocio.ControladorUsuario;
@@ -50,13 +52,18 @@ public class ServletLogin extends HttpServlet {
 		HttpSession session= request.getSession(true);
 		
 	    
-		String vUsername =request.getParameter("username");
+		String vUsername =request.getParameter("inputEmail");
 	    
-		String vPassword =request.getParameter("password");
+		String vPassword =request.getParameter("inputPassword");
 	    try{
 	    	
 	    if(controladorUsuario.validarUsuario(vUsername,vPassword))
 	    {
+	    	Cookie cookieUsuario = new Cookie("cookieUsuario", vUsername);
+            cookieUsuario.setPath("/");
+            cookieUsuario.setMaxAge(60*60*24*31);
+            response.addCookie(cookieUsuario);
+            
 	    	session.setAttribute("usuario",vUsername);
 	    	session.setAttribute("controladorUsuario",controladorUsuario);
 	    	

@@ -55,7 +55,7 @@
     <body>
     <div class="container">
 
-        <form class="form-signin" id="login" action="ServletLogin" method="post" onsubmit="return vaidar();">
+        <form class="form-signin" id="form-singin" action="ServletLogin" method="post">
         <h2 class="form-signin-heading">Bienvenido</h2>
         <label for="inputEmail" class="sr-only">Direccion de correo</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
@@ -94,34 +94,6 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-	function validar()
-    {
-        var fallo = false;
-        var falta = "";
-       
-       
-        if (datos.username.value == "") {
-            falta += "Falta ingresar Usuario \n";
-            fallo = true;
-        }
-
-        if (datos.password.value == "") {
-            falta += "Falta ingresar pass \n";
-            fallo = true;
-        }
-
-
-        if (fallo) {
-            alert(falta);
-            return false;
-        }
-        else {
-         
-            return true;
-        }
-    }
-	</script>
 	
 
 
