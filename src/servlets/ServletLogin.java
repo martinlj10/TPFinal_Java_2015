@@ -42,6 +42,8 @@ public class ServletLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.setContentType("text/html");
+		
 		ControladorUsuario controladorUsuario = new ControladorUsuario();
 				
 		Usuario vUsuario;
@@ -59,7 +61,7 @@ public class ServletLogin extends HttpServlet {
 	    	session.setAttribute("controladorUsuario",controladorUsuario);
 	    	
 	    	session.setAttribute("pass", vPassword);
-	    	request.getRequestDispatcher("/.jsp").forward(request, response);/*redirige a la pagina principal*/
+	    	request.getRequestDispatcher("/inicio.jsp").forward(request, response);/*redirige a la pagina principal*/
 	    }
 	    else
 	    	{
@@ -68,7 +70,7 @@ public class ServletLogin extends HttpServlet {
 	  	
 	    }catch(Exception e){
 		   session.setAttribute("error", e);
-		   response.sendRedirect("/TPFinal/ErrorLogin.jsp");/*Redirige a la pagina de error Login*/  
+		   response.sendRedirect("/nuevologin.jsp");/*Redirige a la pagina Login*/  
 	   }
 	    	
 		

@@ -25,7 +25,7 @@ public class ConexionBD {
 
     Connection Cone = null;
 	static String Url = "jdbc:mysql://localhost:3306/";
-	static String dbName = "pdv_db";/*nombre de la base de datos*/
+	static String dbName = "comentautos_db";/*nombre de la base de datos*/
 	static String driver = "com.mysql.jdbc.Driver";
 	static String userName = "root"; 
 	static String password = "";

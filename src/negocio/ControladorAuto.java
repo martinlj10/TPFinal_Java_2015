@@ -19,14 +19,14 @@ public class ControladorAuto {
 		return idArticuloNuevo;
 	}
 
-	public void DeleteAuto(int pIdAuto)
+	public static void DeleteAuto(int pIdAuto)
 	{
 		
 		CatalogoAuto.DeleteAuto(pIdAuto);
 		
 	}
 
-	public Auto getOne(int pIdAuto)
+	public static Auto getOne(int pIdAuto)
 	{
 		Auto AutoDev = new Auto();/*Crea la estructura del auto a devolver*/
 		AutoDev = CatalogoAuto.GetOne(pIdAuto);/*Obtiene el auto a devolver por Id*/
@@ -34,7 +34,7 @@ public class ControladorAuto {
 		return AutoDev;
 	}
 	
-	public int UpdateAuto(int pCod_auto, String pDescripcion, float pPrecio_sug, int pValoracion, String pNombre_auto, int pCod_marca, int pAno_fabric)
+	public static int UpdateAuto(int pCod_auto, String pDescripcion, float pPrecio_sug, int pValoracion, String pNombre_auto, int pCod_marca, int pAno_fabric)
 	{
 		int rowAffect;
 		Auto modifAuto = new Auto();
@@ -49,7 +49,7 @@ public class ControladorAuto {
 		
 	}
 	
-	public ArrayList<Auto> getAll()
+	public static ArrayList<Auto> getAll()
 	{
 		ArrayList<Auto> AutosAll = new ArrayList<Auto>();
 		AutosAll = CatalogoAuto.GetAll();
@@ -57,5 +57,11 @@ public class ControladorAuto {
 		return AutosAll;
 		
 	}
-
+ public static void ActualizaValor(int pIdCod_Auto, int pValoracion)
+ {
+	 CatalogoAuto.ActualizaValoracion(pIdCod_Auto, pValoracion);
+	 
+ }
+	
+	
 }

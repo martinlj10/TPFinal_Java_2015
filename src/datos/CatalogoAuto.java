@@ -16,8 +16,7 @@ public class CatalogoAuto {
 	{ //se cargan los autos
 		try{
 			
-			//Agrega un articulo a la Tabla Articulos y tambien agrega el precio del articulo con la fecha de vigencia en la tabla Precios_Articulos
-		String SQLCons= "INSERT INTO Auto ("+CAMPOS+") VALUES (?,?,?,?,?,?,?)"; 
+			String SQLCons= "INSERT INTO Auto ("+CAMPOS+") VALUES (?,?,?,?,?,?,?)"; 
 	ConexionBD conecta = new ConexionBD();
 	conecta.OpenConection();
 	PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);

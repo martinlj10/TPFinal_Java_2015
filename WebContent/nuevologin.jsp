@@ -24,7 +24,7 @@
 </head>
 
 <body>
-
+<% session.invalidate(); %>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -55,7 +55,7 @@
     <body>
     <div class="container">
 
-        <form class="form-signin">
+        <form class="form-signin" id="login" action="ServletLogin" method="post" onsubmit="return vaidar();">
         <h2 class="form-signin-heading">Bienvenido</h2>
         <label for="inputEmail" class="sr-only">Direccion de correo</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
@@ -66,7 +66,7 @@
             <input type="checkbox" value="remember-me"> Recuerdame
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
       </form>
         
     </div>
@@ -94,7 +94,35 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+	function validar()
+    {
+        var fallo = false;
+        var falta = "";
+       
+       
+        if (datos.username.value == "") {
+            falta += "Falta ingresar Usuario \n";
+            fallo = true;
+        }
 
+        if (datos.password.value == "") {
+            falta += "Falta ingresar pass \n";
+            fallo = true;
+        }
+
+
+        if (fallo) {
+            alert(falta);
+            return false;
+        }
+        else {
+         
+            return true;
+        }
+    }
+	</script>
+	
 
 
 </body></html>
