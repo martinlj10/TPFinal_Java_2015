@@ -1,3 +1,5 @@
+<%@page import="javax.xml.stream.events.Comment"%>
+<%@ page import="servlets.ServletAddComentario"%>
 <html lang="en"><head>
 
     <meta charset="utf-8">
@@ -20,14 +22,22 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+    $(document).ready(function(){
+    	$('#submit').click(function(event){
+    		var comentarioVar = $('#comment').val();
+    		$.post('ServletAddComentario', {
+    			comentario : comentarioVar
+    		}, function(responseText){
+    			$('tabla').html(responseText);
+    			
+    		});
+    		
+    		});
+    	});
     
-    <script type="text/javascript">
-    function retornaComentario(comment)
-    {
-    	//Retornar el comentario de la popup
-    	
-    }
     </script>
+    
     
 </head>
 
@@ -113,6 +123,7 @@
                     </div>
 
  <!-- Modal -->
+
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -121,10 +132,17 @@
           <h4 class="modal-title">Tu comentario</h4>
         </div>
         <div class="modal-body">
-          <p>Aqui va un cuadro de texto para rellenar.</p>
+      
+        <div class="form-group">
+      
+      <label for="comment">Comment:</label>
+      <textarea class="form-control" rows="5" id="comment"></textarea>
+		  </div>
+          
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="retornaComentario()">Comentar</button>
+       <div class="modal-footer">
+          
+          <button type="submit" class="btn btn-primary" data-dismiss="modal" >Comentar</button>
         </div>
       </div>
     </div>
@@ -132,51 +150,23 @@
   
 
                     <hr>
-
-                    <div class="row">
+                    <%for(int i=0; i<2;i++){ %>//agregar variable de cantidad de comentarios
+			        <div class="row">
                         <div class="col-md-12">
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">10 days ago</span>
-                            <p>This product was great in terms of quality. I would definitely buy another!</p>
+                            Anonymous->nombre Usuario
+                            <span class="pull-right">10 days ago-Fecha Publicacion</span>
+                            <p>Comentario:This product was great in terms of quality. I would definitely buy another! Se repite</p>
                         </div>
                     </div>
-
+			
                     <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">12 days ago</span>
-                            <p>I've alredy ordered another one!</p>
-                        </div>
+					<% } %>
                     </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">15 days ago</span>
-                            <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-                        </div>
-                    </div>
-
-                </div>
 
             </div>
 
