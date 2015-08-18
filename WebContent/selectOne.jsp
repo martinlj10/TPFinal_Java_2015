@@ -1,5 +1,5 @@
+<%@page import="java.awt.Window"%>
 <%@page import="javax.xml.stream.events.Comment"%>
-<%@ page import="servlets.ServletAddComentario"%>
 <html lang="en"><head>
 
     <meta charset="utf-8">
@@ -24,7 +24,7 @@
     <![endif]-->
     <script>
     $(document).ready(function(){
-    	$('#submit').click(function(event){
+    	$('#btnComment').click(function(event){
     		var comentarioVar = $('#comment').val();
     		$.post('ServletAddComentario', {
     			comentario : comentarioVar
@@ -37,7 +37,7 @@
     	});
     
     </script>
-    
+    <%//Revisar script AJAX %>
     
 </head>
 
@@ -142,7 +142,7 @@
         </div>
        <div class="modal-footer">
           
-          <button type="submit" class="btn btn-primary" data-dismiss="modal" >Comentar</button>
+          <button id ="btnComment" type="submit" class="btn btn-primary" data-dismiss="modal" >Comentar</button>
         </div>
       </div>
     </div>

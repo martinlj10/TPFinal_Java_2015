@@ -17,7 +17,7 @@ public class CatalogoUsuarios {
 		try{
 			
 		 
-		String SQLCons= "SELECT * FROM usuarios WHERE username='?' ";
+		String SQLCons= "SELECT * FROM usuarios WHERE username=?";
 		ConexionBD conecta = new ConexionBD();
 		conecta.OpenConection();
 		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
@@ -36,6 +36,7 @@ public class CatalogoUsuarios {
 						} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+						System.out.println("Error al recuperar Usuario");
 						
 								}
 		return userBD;

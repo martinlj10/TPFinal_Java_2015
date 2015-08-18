@@ -37,7 +37,9 @@ public boolean validarUsuario(String pUsername, String pPassword)
 {
 	
 	user = this.getUsuario(pUsername);
-	if((user.getUsername()==pUsername)&& (user.getPassword()==pPassword))
+	String nombreUsuario = user.getUsername();
+	String contrasena = user.getPassword();
+	if(nombreUsuario.equalsIgnoreCase(pUsername) && contrasena.equalsIgnoreCase(pPassword))
 	{
 		return true;
 	}

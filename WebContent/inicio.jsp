@@ -55,15 +55,16 @@
                     <div class="pull-right">
                     <% 
     String usuario ="";                        
-    try{      
+    try{ 
     if(session.getAttribute("usuario") != null){
-        usuario = "<b>"+session.getAttribute("usu").toString()+"</b>";
+        usuario = (String)"<b>"+session.getAttribute("usuario")+"</b>";
         
    
   
 %>
+<br>
                    <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Usuario<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=usuario %><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="http://www.afa.org.ar/index.php?option=com_content&view=category&layout=blog&id=159&Itemid=124">Logout</a></li>
       		

@@ -48,7 +48,7 @@ private static final long serialVersionUID = 1L;
 		java.util.Date fechaComentario = new Date();
 		java.sql.Date fechaSQL = new java.sql.Date(fechaComentario.getTime());
 		nuevoComentario.setFecha_public((fechaSQL));
-		nuevoComentario.setComentario(request.getParameter("comentario"));
+		nuevoComentario.setComentario(request.getParameter("comment"));
 				
 		try{
 		ControladorComentario.AddComentario(nuevoComentario);

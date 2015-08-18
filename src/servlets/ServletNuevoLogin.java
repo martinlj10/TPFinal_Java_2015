@@ -1,5 +1,6 @@
 package servlets;
 
+import java.awt.Window;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -47,13 +48,14 @@ public class ServletNuevoLogin extends HttpServlet {
 		
 		HttpSession session= request.getSession(true);
 			    
-		String vUsername =request.getParameter("inputEmail");
+		String vUsername =request.getParameter("inputUsername");
 	    
 		String vPassword =request.getParameter("inputPassword");
 		
 		try{
 			if(controlador.validarUsuario(vUsername, vPassword)== true)
 			{
+				
 				Cookie cookieUsuario = new Cookie("cookieUsuario", vUsername);
 	            cookieUsuario.setPath("/");
 	            cookieUsuario.setMaxAge(60*60*24*31);
@@ -67,15 +69,17 @@ public class ServletNuevoLogin extends HttpServlet {
 			}
 			else
 	    	{
+				
 	    		throw new Exception("Ingreso incorrecto");
-	    		
 	    	}
 	  	
 	    }catch(Exception e){
 	    
 		   session.setAttribute("error", e);
-		   response.sendRedirect("/nuevologin.jsp");//Redirige a la pagina Login  
-		    }
+		   request.getRequestDispatcher("/nuevologin.jsp").forward(request, response);
+		 
+		    
+	    }
 						
 		}
 		
