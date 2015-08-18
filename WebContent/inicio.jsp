@@ -51,8 +51,35 @@
                     <li>
                         <a href="#">Contacto</a>
                     </li>
-                    
-                </ul>
+                    </ul>
+                    <div class="pull-right">
+                    <% 
+    String usuario ="";                        
+    try{      
+    if(session.getAttribute("usuario") != null){
+        usuario = "<b>"+session.getAttribute("usu").toString()+"</b>";
+        
+   
+  
+%>
+                   <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Usuario<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="http://www.afa.org.ar/index.php?option=com_content&view=category&layout=blog&id=159&Itemid=124">Logout</a></li>
+      		
+          </ul>
+        </li>
+<%  }
+    else
+    { 
+%>    	
+					<a class="navbar-brand" href="nuevologin.jsp">Login</a>
+					<a class="navbar-brand" href="signin.jsp">Registrarse</a>
+<% 
+    }
+    }catch(NullPointerException ex){} 
+%>                    
+                </div>  <!-- /del pull right -->
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -66,11 +93,37 @@
 
             <div class="col-md-3" float=left>
                 <p class="lead">Rosario Shop</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Autos</a>
-                    <a href="#" class="list-group-item">Camionetas</a>
-                    <a href="#" class="list-group-item">Motos</a>
-                </div>
+                
+                 <div class="form-group">
+                               
+                                <select class="form-control">
+                                    <option>Seleccione tipo vehículo</option>
+                                    <option>Autos</option>
+                                    <option>Camionetas</option>
+                                    <option>Motos</option>
+                                  
+                                </select>
+                            </div>
+                              <div class="form-group">
+                               
+                                <select class="form-control">
+                                    <option>Seleccione marca</option>
+                                    <option>Marcas cargadas</option>
+                                    
+                                  
+                                </select>
+                            </div>
+                            <div>
+                            <p>Filtrar por valor</p>
+                            <p>Radiobuttton activa poner valores</p>
+                            <p>Valor minimo icono</p>
+                            <p>Valor maximo icono</p>
+                            </div>
+                            <div class="col-md-6">
+                             <button type="button" class="btn btn-primary">
+      							<span class="glyphicon glyphicon-search"></span>
+    						</button>
+    						</div>
             </div>
 
             <div class="col-md-9">
