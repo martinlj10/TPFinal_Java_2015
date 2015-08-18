@@ -11,7 +11,7 @@ public class ControladorComentario {
 
 	//private CatalogoComentario catCliente = new CatalogoComentario();
 	
-	public int AddComentario(Comentario nuevoComentario)
+	public static int AddComentario(Comentario nuevoComentario)
 	{
 		//Validaciones de Negocio
 		
@@ -20,7 +20,7 @@ public class ControladorComentario {
 		return idComentarioNuevo;
 	}
 
-	public void DeleteComentario(int pCod_Auto, int pCod_Usuario, Date pFecha_Public)
+	public static void DeleteComentario(int pCod_Auto, int pCod_Usuario, Date pFecha_Public)
 	{
 		
 		CatalogoComentario.DeleteComentario(pCod_Auto, pCod_Usuario, pFecha_Public);

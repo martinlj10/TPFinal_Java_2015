@@ -18,6 +18,23 @@ body{
 <title>Insert title here</title>
 </head>
 <body>
+<form name="datos" id="datos" action="ServletLogin" class="form-horizontal" method="post" onsubmit="return validar();">
+								<fieldset>
+									<div class="input-prepend" >
+										<span class="add-on"><i class="icon-user"></i></span><input class="input-large span10" name="username" id="username" type="text" placeholder="user" />
+									</div>
+									<div class="clearfix"></div>
 
+									<div class="input-prepend" >
+										<span class="add-on"><i class="icon-lock"></i></span><input class="input-large span10" name="password" id="password" type="password" placeholder="pass" />
+									</div>
+									<div class="clearfix"></div>
+
+									<p class="center span4">
+									<button type="submit" class="btn btn-primary">Ingresar</button>
+									</p>
+								</fieldset>
+
+						</form>
 </body>
 </html>

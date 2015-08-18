@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane; 
 
+import datos.CatalogoUsuarios;
+import modelos.Usuario;
+
 public class ControladorUsuario {
 	
 
 datos.CatalogoUsuarios catUsuarios;
-Usuario user;	
+Usuario user = new Usuario();	
 
 
 public ControladorUsuario(){
@@ -18,9 +21,10 @@ public ControladorUsuario(){
 }
 
 
-public Usuario getUsuario(String pUsername, String pPassword) throws Exception{
+public Usuario getUsuario(String pUsername)
+{
 	
-	user =catUsuarios.GetOne(pUsername, pPassword);
+	user =CatalogoUsuarios.GetOne(pUsername);
 	
 	return(user);	
 	
@@ -32,9 +36,8 @@ public Usuario getUsuario(String pUsername, String pPassword) throws Exception{
 public boolean validarUsuario(String pUsername, String pPassword)
 {
 	
-	user=catUsuarios.GetOne(pUsername, pPassword);
-	
-	if(user.getUsername().equals(pUsername)&& user.getPassword().equals(pPassword))
+	user = this.getUsuario(pUsername);
+	if((user.getUsername()==pUsername)&& (user.getPassword()==pPassword))
 	{
 		return true;
 	}

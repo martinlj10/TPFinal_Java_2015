@@ -55,7 +55,7 @@
     <body>
     <div class="container">
 
-        <form class="form-signin" id="form-singin" action="ServletLogin" method="post">
+        <form class="form-signin" id="form-singin" action="ServletNuevoLogin" method="post">
         <h2 class="form-signin-heading">Bienvenido</h2>
         <label for="inputEmail" class="sr-only">Direccion de correo</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">

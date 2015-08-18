@@ -15,16 +15,16 @@ import modelos.Comentario;
 import negocio.ControladorAuto;
 import negocio.ControladorComentario;
 
-@WebServlet("/ServletAddCliente")
+@WebServlet("/ServletAddComentario")
 
-public class ServletAddCliente {
+public class ServletAddComentario {
 
 private static final long serialVersionUID = 1L;
     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletAddCliente() {
+    public ServletAddComentario() {
         
         // TODO Auto-generated constructor stub
     }
@@ -41,22 +41,22 @@ private static final long serialVersionUID = 1L;
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		ControladorComentario controladorCliente =(ControladorComentario)session.getAttribute("controladorCliente");
-		Comentario nuevoCliente = new Comentario();
-		nuevoCliente.setAlias(request.getParameter("alias").toUpperCase());
-		nuevoCliente.setId_cliente(Integer.parseInt(request.getParameter("id_cliente")));
-		nuevoCliente.setId_localidad(Integer.parseInt(request.getParameter("id_localidad")));
-		nuevoCliente.setLocalidad(request.getParameter("localidad").toUpperCase());//ver si ponemos localidad o id_localidad
-		nuevoCliente.setRazon_social(request.getParameter("razon_social").toUpperCase());
-		nuevoCliente.setZona(request.getParameter("zona").toUpperCase());
+		ControladorComentario controlador =(ControladorComentario)session.getAttribute("controladorComentario");
+		Comentario nuevoComentario = new Comentario();
+		nuevoComentario.setCod_auto(Integer.parseInt(request.getParameter("cod_auto")));
+		nuevoComentario.setCod_usuario(Integer.parseInt(request.getParameter("cod_usuario")));
+		java.util.Date fechaComentario = new Date();
+		java.sql.Date fechaSQL = new java.sql.Date(fechaComentario.getTime());
+		nuevoComentario.setFecha_public((fechaSQL));
+		nuevoComentario.setComentario(request.getParameter("comentario"));
 				
 		try{
-		//controladorCliente.(nuevoCliente);
-		response.sendRedirect("/ListaArticulos.jsp");/*Redirige a la lista completa de articulos*/
+		ControladorComentario.AddComentario(nuevoComentario);
+		response.sendRedirect("/selectOne.jsp");/*Redirige al Auto seleccionado con el comentario nuevo*/
 		}
 		catch(Exception e)
 		{
-			response.sendRedirect("/ErrorAlta.html"); //No está creada esta vista1.
+			response.sendRedirect("/ErrorComentario.html"); //No está creada esta vista1.
 		}
 		// TODO Auto-generated method stub
 	}

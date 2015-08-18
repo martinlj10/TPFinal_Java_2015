@@ -3,27 +3,25 @@ package datos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import negocio.Usuario;
+import modelos.Usuario;
 
 public class CatalogoUsuarios {
 
 
 
 
-	public static Usuario GetOne(String pUsername, String pPassword)
+	public static Usuario GetOne(String pUsername)
 	{
 		
 		Usuario userBD = new Usuario();
 		try{
 			
 		 
-		
-		String SQLCons= "SELECT * FROM Usuarios WHERE username=? and password=?";
+		String SQLCons= "SELECT * FROM usuarios WHERE username='?' ";
 		ConexionBD conecta = new ConexionBD();
 		conecta.OpenConection();
 		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
 		stmt.setString(1, pUsername);
-		stmt.setString(2, pPassword);
 		ResultSet rta = stmt.executeQuery();
 		while(rta.next())
 		{

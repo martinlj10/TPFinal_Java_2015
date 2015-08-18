@@ -4,53 +4,44 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import negocio.ControladorLineaPedido;
-
-/**
- * Servlet implementation class ServletBajaLineaPedido
- */
-@WebServlet("/ServletBajaLineaPedido")
+import negocio.ControladorUsuario;
+import negocio.Usuario;
 
 public class ServletBajaLineaPedido extends HttpServlet {
 
-private static final long serialVersionUID = 1L;
-    
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServletBajaLineaPedido() {
-      
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session=request.getSession();
-		
-		ControladorLineaPedido controlador = (ControladorLineaPedido)session.getAttribute("controladorLineaPedido");
-		int vIdPedido = Integer.parseInt(request.getParameter("idPedido"));
-		int vIdLineaPedido = Integer.parseInt(request.getParameter("idLineaPedido"));
-		controlador.DeleteLineaPedido(vIdLineaPedido, vIdPedido);
-		response.sendRedirect("/ListaPedidos.jsp");/*Vista no creada*/
+		response.setContentType("text/html");				
+        String idUser = request.getParameter("inputEmail");		
+        String pass = request.getParameter("inputPassword");	
+
+        HttpSession sessionUsu = request.getSession();		
+            		
+            ControladorUsuario c = new ControladorUsuario();			
+                Usuario usuario = (Usuario) request.getSession().getAttribute("oLogin");
+                //c.log(usuario.getidUsuario(), usuario.getNombre(), usuario.getApellido());
+                if(request.getParameter("signed-in")!= null){
+                Cookie cookieUsuario = new Cookie("cookieUsuario", idUser);
+                cookieUsuario.setPath("/");
+                cookieUsuario.setMaxAge(60*60*24*31);
+                response.addCookie(cookieUsuario);
+
+             request.getSession().setAttribute("validaLogin", 1);
+            request.getSession().setAttribute("chequeado", "login");
+            response.sendRedirect("inicio.jsp");
+        }
 		
 		
 		// TODO Auto-generated method stub
-	}
+}
+}
 
 	
-}
+

@@ -20,7 +20,15 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    
+    <script type="text/javascript">
+    function retornaComentario(comment)
+    {
+    	//Retornar el comentario de la popup
+    	
+    }
+    </script>
+    
 </head>
 
 <body>
@@ -101,8 +109,27 @@
                 <div class="well">
 
                     <div class="text-right">
-                        <a class="btn btn-success">Leave a Review</a>
+                       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Deja tu Comentario</button>
                     </div>
+
+ <!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Tu comentario</h4>
+        </div>
+        <div class="modal-body">
+          <p>Aqui va un cuadro de texto para rellenar.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="retornaComentario()">Comentar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
                     <hr>
 
