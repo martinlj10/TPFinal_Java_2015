@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import modelos.Comentario;
 
 public class CatalogoComentario {
-	private final static String CAMPOS = " cod_auto, cod_auto, fecha_public, comentario";
+	private final static String CAMPOS = " cod_auto, nombreUsuario, fecha_public, comentario";
 	public static int AddComentario(Comentario newComentario)
 	{
 		try{
@@ -20,7 +20,7 @@ public class CatalogoComentario {
 	conecta.OpenConection();
 	PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
 	stmt.setInt(1,newComentario.getCod_auto());
-	stmt.setInt(2, newComentario.getCod_auto());
+	stmt.setString(2, newComentario.getNom_usuario());
 	stmt.setDate(3, newComentario.getFecha_public());
 	stmt.setString(4, newComentario.getComentario());
 	
@@ -33,15 +33,15 @@ public class CatalogoComentario {
 									}
 			return Statement.RETURN_GENERATED_KEYS;
 	}
-	public static void DeleteComentario(int pCod_Auto, int pCod_Usuario, Date pFecha_public)
+	public static void DeleteComentario(int pCod_Auto, String pNom_Usuario, Date pFecha_public)
 	{
-		String SQLCons= "DELETE FROM comentario where (?= cod_cliente AND ?=cod_usuario AND ?=fecha_public)";
+		String SQLCons= "DELETE FROM comentario where (?= nombreUsuario AND ?=cod_usuario AND ?=fecha_public)";
 		try {
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
 			stmt.setInt(1, pCod_Auto);
-			stmt.setInt(1, pCod_Usuario);
+			stmt.setString(1, pNom_Usuario);
 			stmt.setDate(1, pFecha_public);
 			int rta = stmt.executeUpdate();
 			
@@ -53,7 +53,7 @@ public class CatalogoComentario {
 		}
 	public static int UpdateComentario (Comentario ComentarioUPD)
 	{
-		String SQLCons= "UPDATE Comentario SET comentario=? WHERE (?=cod_auto AND ?= cod_usuario, ?=fecha_public)";
+		String SQLCons= "UPDATE Comentario SET comentario=? WHERE (?=cod_auto AND ?= nombreUsuario, ?=fecha_public)";
 		try{
 			
 		ConexionBD conecta = new ConexionBD();
@@ -61,7 +61,7 @@ public class CatalogoComentario {
 		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
 		stmt.setString(1, ComentarioUPD.getComentario());
 		stmt.setInt(2, ComentarioUPD.getCod_auto());
-		stmt.setInt(3, ComentarioUPD.getCod_usuario());
+		stmt.setString(3, ComentarioUPD.getNom_usuario());
 		stmt.setDate(4, ComentarioUPD.getFecha_public());
 		
 		int rta = stmt.executeUpdate();
@@ -88,7 +88,7 @@ public class CatalogoComentario {
 			 	while(rta.next())
 						{		Comentario comentarioDev = new Comentario();
 					 			comentarioDev.setCod_auto(rta.getInt("cod_auto"));
-								comentarioDev.setCod_usuario(rta.getInt("cod_usuario"));						
+								comentarioDev.setNom_usuario(rta.getString("nombreUsuario"));						
 								comentarioDev.setFecha_public(rta.getDate("fecha_public"));
 								comentarioDev.setComentario(rta.getString("comentario"));
 								ComentariosAll.add(comentarioDev);

@@ -20,10 +20,10 @@ public class ControladorComentario {
 		return idComentarioNuevo;
 	}
 
-	public static void DeleteComentario(int pCod_Auto, int pCod_Usuario, Date pFecha_Public)
+	public static void DeleteComentario(int pCod_Auto, String pNom_Usuario, Date pFecha_Public)
 	{
 		
-		CatalogoComentario.DeleteComentario(pCod_Auto, pCod_Usuario, pFecha_Public);
+		CatalogoComentario.DeleteComentario(pCod_Auto, pNom_Usuario, pFecha_Public);
 		
 	}
 
@@ -35,12 +35,12 @@ public class ControladorComentario {
 		return ComentariosAll;
 	}
 	
-	public int UpdateComentario(int pCod_Auto, int pCod_Usuario, Date pFecha_Public, String pComentario)
+	public int UpdateComentario(int pCod_Auto, String pNom_Usuario, Date pFecha_Public, String pComentario)
 	{
 		int rowAffect;
 		Comentario modifComentario = new Comentario();
 		modifComentario.setCod_auto(pCod_Auto);
-		modifComentario.setCod_usuario(pCod_Usuario);
+		modifComentario.setNom_usuario(pNom_Usuario);
 		modifComentario.setFecha_public(pFecha_Public);
 		modifComentario.setComentario(pComentario);
 		rowAffect = CatalogoComentario.UpdateComentario(modifComentario);

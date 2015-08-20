@@ -41,10 +41,9 @@ private static final long serialVersionUID = 1L;
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		ControladorComentario controlador =(ControladorComentario)session.getAttribute("controladorComentario");
 		Comentario nuevoComentario = new Comentario();
 		nuevoComentario.setCod_auto(Integer.parseInt(request.getParameter("cod_auto")));
-		nuevoComentario.setCod_usuario(Integer.parseInt(request.getParameter("cod_usuario")));
+		nuevoComentario.setNom_usuario((String)(request.getParameter("cod_usuario")));
 		java.util.Date fechaComentario = new Date();
 		java.sql.Date fechaSQL = new java.sql.Date(fechaComentario.getTime());
 		nuevoComentario.setFecha_public((fechaSQL));

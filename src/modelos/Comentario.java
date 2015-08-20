@@ -14,14 +14,14 @@ public class Comentario {
 		this.cod_auto = cod_auto;
 	}
 	
-	private int cod_usuario;
+	private String nom_usuario;
 
-	public int getCod_usuario() {
-		return cod_usuario;
+	public String getNom_usuario() {
+		return nom_usuario;
 	}
 
-	public void setCod_usuario(int cod_usuario) {
-		this.cod_usuario = cod_usuario;
+	public void setNom_usuario(String cod_usuario) {
+		this.nom_usuario = cod_usuario;
 	}
 	
 	private Date fecha_public;
