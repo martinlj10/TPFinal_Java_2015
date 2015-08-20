@@ -1,4 +1,7 @@
 
+<%@page import="negocio.ControladorAuto"%>
+<%@page import="modelos.Auto"%>
+<%@page import="java.util.ArrayList"%>
 <html lang="en"><head>
 
     <meta charset="utf-8">
@@ -54,6 +57,10 @@
                     </ul>
                     <div class="pull-right">
                     <% 
+    ArrayList<Auto> AutosAll = new ArrayList<Auto>();
+    AutosAll = ControladorAuto.getAll();
+                    
+                    
     String usuario ="";                        
     try{ 
     if(session.getAttribute("usuario") != null){
@@ -161,30 +168,33 @@
                 </div>
 
                 <div class="row">
-					<%for(int i=0; i<6;i++){ %>//Var CantAutos
+					<%for(int i=0; i<AutosAll.size();i++){ %>//Var CantAutos
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">$24.99 </h4>
-                                <h4><a href="#">First Product</a>
+                                <h4 class="pull-right"><%=AutosAll.get(i).getPrecio() %></h4>
+                                <h4><a href="#"><%=AutosAll.get(i).getNombre_auto() %></a>
                                 </h4>
-                                <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                                <p><%=AutosAll.get(i).getDescripcionAuto()%></p>
                             </div>
                             <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
+                                <p class="pull-right">Cantidad de Comentarios</p>
                                 <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
+                                    <% int Valoracion = AutosAll.get(i).getValoracion();
+                                    for(int j=0; j<Valoracion;j++){ %>
+                                   <span class="glyphicon glyphicon-star"></span>
+                                	   			<%} %>
+                                   <%for(int m=0;m<(5-Valoracion);m++){ %>
+                                	<span class="glyphicon glyphicon-star"></span>
+                                	<%} %>
                                 </p>
+                                
                             </div>
                         </div>
                     </div>
-					<% } %>
-                                        
+					
+                          <% } %>              
                 </div>
 
             </div>
