@@ -47,10 +47,13 @@ public class ServletSeleccionaAuto extends HttpServlet {
 		ControladorMarca controladorMarca = (ControladorMarca)session.getAttribute("controladorMarca");
 		Auto nuevoAuto = new Auto();
 		Marca nuevaMarca = new Marca();
-		int cod_auto = Integer.getInteger(request.getParameter("cod_auto"));
+		String cod_auto = (request.getParameter("cod_auto"));
+		
 				
 		try{
-		nuevoAuto = ControladorAuto.getOne(cod_auto);
+		System.out.println("Acallega");
+		System.out.println(cod_auto.isEmpty());
+		nuevoAuto = ControladorAuto.getOne(Integer.parseInt(cod_auto));
 		nuevaMarca = ControladorMarca.getOne(nuevoAuto.getCod_marca());
 		
 		session.setAttribute("codAuto",nuevoAuto.getCod_auto());

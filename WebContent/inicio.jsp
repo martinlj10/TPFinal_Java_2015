@@ -1,4 +1,5 @@
 
+<%@page import="negocio.ControladorComentario"%>
 <%@page import="negocio.ControladorAuto"%>
 <%@page import="modelos.Auto"%>
 <%@page import="java.util.ArrayList"%>
@@ -166,27 +167,29 @@
                     </div>
 
                 </div>
-
+				<form id="submitForm" name="submitForm" action="ServletSeleccionaAuto" method="post">
                 <div class="row">
-					<%for(int i=0; i<AutosAll.size();i++){ %>//Var CantAutos
+					
+					<%for(int i=0; i<AutosAll.size();i++){ %>
+                    
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right"><%=AutosAll.get(i).getPrecio() %></h4>
-                                <h4><a href="#"><%=AutosAll.get(i).getNombre_auto() %></a>
+                                <h4 class="pull-right">U$D<%=AutosAll.get(i).getPrecio() %></h4>
+                                <h4><a id="cod_auto" href="javascript:;" onclick="llenaCod_auto(<%=AutosAll.get(i).getCod_auto()%>)"><%=AutosAll.get(i).getNombre_auto() %></a>
                                 </h4>
                                 <p><%=AutosAll.get(i).getDescripcionAuto()%></p>
                             </div>
                             <div class="ratings">
-                                <p class="pull-right">Cantidad de Comentarios</p>
+                                <p class="pull-right"><%=ControladorComentario.getAll(AutosAll.get(i).getCod_auto()).size() %> Comentarios</p>
                                 <p>
                                     <% int Valoracion = AutosAll.get(i).getValoracion();
                                     for(int j=0; j<Valoracion;j++){ %>
                                    <span class="glyphicon glyphicon-star"></span>
                                 	   			<%} %>
                                    <%for(int m=0;m<(5-Valoracion);m++){ %>
-                                	<span class="glyphicon glyphicon-star"></span>
+                                	<span class="glyphicon glyphicon-star-empty"></span>
                                 	<%} %>
                                 </p>
                                 
@@ -195,8 +198,9 @@
                     </div>
 					
                           <% } %>              
+				
                 </div>
-
+				</form>
             </div>
 
         </div>
@@ -225,6 +229,15 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+function llenaCod_auto(frm,codigo)
+{
+	frm.value = codigo;
+	document.getElementById('submitForm').submit(); 
+	
+	}</script>
+
 
 
 

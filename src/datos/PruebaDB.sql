@@ -1,1 +1,2 @@
-SELECT * FROM usuarios WHERE username='m@a.r'
+SELECT * FROM comentario WHERE cod_auto=1
+

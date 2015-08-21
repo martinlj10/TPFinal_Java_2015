@@ -79,7 +79,7 @@ public class CatalogoComentario {
 	ArrayList<Comentario> ComentariosAll = new ArrayList<Comentario>();
 		
 		try {
-			String SQLCons= "Select "+CAMPOS+" FROM Comentario WHERE cod_usuario = ? ORDER BY fecha_public";
+			String SQLCons= "Select "+CAMPOS+" FROM Comentario WHERE cod_auto = ? ORDER BY fecha_public";
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
