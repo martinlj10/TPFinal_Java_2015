@@ -1,5 +1,12 @@
+<%@page import="datos.CatalogoComentario"%>
+<%@page import="modelos.Comentario"%>
 <%@page import="java.awt.Window"%>
 <%@page import="javax.xml.stream.events.Comment"%>
+
+<%@page import="negocio.ControladorComentario"%>
+<%@page import="negocio.ControladorAuto"%>
+<%@page import="modelos.Auto"%>
+<%@page import="java.util.ArrayList"%>
 <html lang="en"><head>
 
     <meta charset="utf-8">
@@ -22,22 +29,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-    $(document).ready(function(){
-    	$('#btnComment').click(function(event){
-    		var comentarioVar = $('#comment').val();
-    		$.post('ServletAddComentario', {
-    			comentario : comentarioVar
-    		}, function(responseText){
-    			$('tabla').html(responseText);
-    			
-    		});
-    		
-    		});
-    	});
     
-    </script>
-    <%//Revisar script AJAX %>
     
 </head>
 
@@ -54,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Rosario Vende</a>
+                <a class="navbar-brand" href="inicio.jsp">Coment@utos</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -69,11 +61,61 @@
                         <a href="#">Contact</a>
                     </li>
                 </ul>
+                <div class="pull-right">
+                    <% 
+    String currentusuario ="";                        
+    try{ 
+    if(session.getAttribute("usuario") != null){
+        currentusuario = (String)"<b>"+session.getAttribute("usuario")+"</b>";
+        
+   
+  
+%>
+<br>
+                   <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=currentusuario %><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="ServletLogOut">Logout</a></li>
+      		
+          </ul>
+        </li>
+<%  }
+    else
+    { 
+%>    	
+					<a class="navbar-brand" href="nuevologin.jsp">Login</a>
+					<a class="navbar-brand" href="signin.jsp">Registrarse</a>
+<% 
+    }
+    }catch(NullPointerException ex){} 
+%>                    
+                </div>  <!-- /del pull right -->
+                
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
+    
+    <% 
+    Auto AutoSel = new Auto();
+    AutoSel = ControladorAuto.getOne(Integer.parseInt(request.getParameter("cod_auto")));
+    ArrayList<Comentario> comentario = new ArrayList<Comentario>();                
+    comentario= ControladorComentario.getAll(AutoSel.getCod_auto());                
+    
+    String usuario ="";                        
+   // session.setAttribute("usuario", "Martin");
+    if(session.getAttribute("usuario") != null){
+        usuario = (String)"<b>"+session.getAttribute("usuario")+"</b>";
+    }
+    else
+    {	
+    //	response.sendRedirect("/inicio.jsp");
+    //	throw new Exception("Usuario no logeado");
+    }
+    %>
+    
+    
 
     <!-- Page Content -->
     <div class="container">
@@ -94,35 +136,33 @@
                 <div class="thumbnail">
                     <img class="img-responsive" src="http://placehold.it/800x300" alt="">
                     <div class="caption-full">
-                        <h4 class="pull-right">$24.99</h4>
-                        <h4><a href="#">Product Name</a>
-                        </h4>
-                        <p>See more snippets like these online store reviews at <a target="_blank" href="http://bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                        <p>Want to make these reviews work? Check out
-                            <strong><a href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this building a review system tutorial</a>
-                            </strong>over at maxoffsky.com!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                    </div>
+                        <h4 class="pull-right">U$D <%=AutoSel.getPrecio() %></h4>
+                        <p><%=AutoSel.getNombre_auto()%></p>
+                        <p><%=AutoSel.getDescripcionAuto() %></p>
+                        </div>
                     <div class="ratings">
-                        <p class="pull-right">3 reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            4.0 stars
-                        </p>
+                        <p class="pull-right"><%=ControladorComentario.getAll(AutoSel.getCod_auto()).size()%>Comentarios</p>
+                        <% int Valoracion = AutoSel.getValoracion();
+                                    for(int j=0; j<Valoracion;j++){ %>
+                                   <span class="glyphicon glyphicon-star"></span>
+                                	   			<%} %>
+                                   <%for(int m=0;m<(5-Valoracion);m++){ %>
+                                	<span class="glyphicon glyphicon-star-empty"></span>
+                                	<%} %>
                     </div>
                 </div>
 
                 <div class="well">
-
+	
+					<% if(session.getAttribute("usuario")!= null){ %>
                     <div class="text-right">
-                       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Deja tu Comentario</button>
+                        
+                       <button type="button" class="btn btn-info btn-lg" onclick="setModalComentario(<%=AutoSel.getCod_auto()%>)" data-toggle="modal" data-target="#myModal">Deja tu Comentario</button>
+                    <% } else {} %>
                     </div>
 
  <!-- Modal -->
+
 
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -132,35 +172,40 @@
           <h4 class="modal-title">Tu comentario</h4>
         </div>
         <div class="modal-body">
-      
+		<form id="comentario">
+		<input id="cod_auto" name="cod_auto" hidden />      
         <div class="form-group">
       
-      <label for="comment">Comment:</label>
-      <textarea class="form-control" rows="5" id="comment"></textarea>
+      <label for="comment">Comentar:</label>
+      <textarea class="form-control" rows="5" id="comment" name ="comment"></textarea>
 		  </div>
-          
+         </form> 
         </div>
        <div class="modal-footer">
-          
-          <button id ="btnComment" type="submit" class="btn btn-primary" data-dismiss="modal" >Comentar</button>
+         
+          <button id ="btnComment" type="button" onclick="comentar()" class="btn btn-primary" data-dismiss="modal" >Comentar</button>
+        
+        
         </div>
       </div>
     </div>
   </div>
-  
-
-                    <hr>
-                    <%for(int i=0; i<2;i++){ %>//agregar variable de cantidad de comentarios
+  		     <hr>
+                    <%for(int i=0; i<comentario.size();i++){ %>
 			        <div class="row">
                         <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous->nombre Usuario
-                            <span class="pull-right">10 days ago-Fecha Publicacion</span>
-                            <p>Comentario:This product was great in terms of quality. I would definitely buy another! Se repite</p>
+                            <%int ValoracionCom = AutoSel.getValoracion();
+                                    for(int j=0; j<ValoracionCom;j++){ %>
+                                   <span class="glyphicon glyphicon-star"></span>
+                                	   			<%} %>
+                                   <%for(int m=0;m<(5-ValoracionCom);m++){ %>
+                                	<span class="glyphicon glyphicon-star-empty"></span>
+                                	<%} 
+                                	session.getAttribute("usuario");
+                                	%>
+                            
+                            <span class="pull-right"><%comentario.get(i).getFecha_public(); %></span>
+                            <p>Comentario:<%=comentario.get(i).getComentario() %></p>
                         </div>
                     </div>
 			
@@ -196,7 +241,39 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+function comentar()
+{
+	
+	var ruta= "GuardaComentario.jsp";
+	$.ajax({
+			async: false,
+			url: ruta,
+			type: "POST",
+			data: "comment="+comment.value+"&cod_auto="+cod_auto.value,
+			success: function(datos)
+			{ 
+				if(datos!="")
+					{
+					window.location.reload();
+					}
+				else
+					{
+					alert("Ha ocurrido un error, reintente");
+					}
+				
+			}
+		
+	});
 
+}
+function setModalComentario(codigoAuto)
+{
+	cod_auto.value = codigoAuto;
+	}
+
+
+</script>
 
 
 

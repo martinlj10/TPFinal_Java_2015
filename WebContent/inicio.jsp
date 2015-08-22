@@ -41,7 +41,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Rosario Vende</a>
+                <a class="navbar-brand" href="inicio.jsp">Coment@utos</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -177,7 +177,7 @@
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
                                 <h4 class="pull-right">U$D<%=AutosAll.get(i).getPrecio() %></h4>
-                                <h4><a id="cod_auto" href="javascript:;" onclick="llenaCod_auto(<%=AutosAll.get(i).getCod_auto()%>)"><%=AutosAll.get(i).getNombre_auto() %></a>
+                                <h4><a id="cod_auto" href="selectOne.jsp?cod_auto=<%=AutosAll.get(i).getCod_auto()%>"><%=AutosAll.get(i).getNombre_auto() %></a>
                                 </h4>
                                 <p><%=AutosAll.get(i).getDescripcionAuto()%></p>
                             </div>
@@ -229,17 +229,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-<script type="text/javascript">
-function llenaCod_auto(frm,codigo)
-{
-	frm.value = codigo;
-	document.getElementById('submitForm').submit(); 
-	
-	}</script>
-
-
-
 
 
 </body></html>

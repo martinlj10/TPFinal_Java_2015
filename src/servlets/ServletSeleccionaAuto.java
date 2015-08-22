@@ -51,8 +51,6 @@ public class ServletSeleccionaAuto extends HttpServlet {
 		
 				
 		try{
-		System.out.println("Acallega");
-		System.out.println(cod_auto.isEmpty());
 		nuevoAuto = ControladorAuto.getOne(Integer.parseInt(cod_auto));
 		nuevaMarca = ControladorMarca.getOne(nuevoAuto.getCod_marca());
 		

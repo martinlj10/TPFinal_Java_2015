@@ -15,14 +15,13 @@ public class CatalogoComentario {
 	{
 		try{
 			//Agrega un comentario a la Tabla Comentarios 
-		String SQLCons= "INSERT INTO comentario ("+CAMPOS+")"+ " VALUES (?,?,?,?)";
+		String SQLCons= "INSERT INTO comentario ("+CAMPOS+")"+ " VALUES (?,?,NOW(),?)";
 	ConexionBD conecta = new ConexionBD();
 	conecta.OpenConection();
 	PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
 	stmt.setInt(1,newComentario.getCod_auto());
 	stmt.setString(2, newComentario.getNom_usuario());
-	stmt.setDate(3, newComentario.getFecha_public());
-	stmt.setString(4, newComentario.getComentario());
+	stmt.setString(3, newComentario.getComentario());
 	
 	stmt.execute();
 	
@@ -42,7 +41,7 @@ public class CatalogoComentario {
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
 			stmt.setInt(1, pCod_Auto);
 			stmt.setString(1, pNom_Usuario);
-			stmt.setDate(1, pFecha_public);
+			stmt.setDate(1, pFecha_public); 
 			int rta = stmt.executeUpdate();
 			
 					} catch (SQLException e) {
