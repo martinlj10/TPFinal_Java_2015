@@ -1,3 +1,5 @@
+<%@page import="negocio.ControladorUsuario"%>
+<%@page import="datos.CatalogoUsuarios"%>
 <html lang="en"><head>
 
     <meta charset="utf-8">
@@ -12,7 +14,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/singin.css" rel="stylesheet">
+    <link href="css/singup.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,15 +39,13 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="inicio.jsp">Coment@utos</a>
-                
             </div>
-            
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                  <div class="pull-right">
-                <a class="navbar-brand" href="SingUp.jsp">Registrarse</a>
-                </div>  
+                    <div class="pull-right">
+                    <a class="navbar-brand" href="nuevologin.jsp">Login</a>
+                    </div>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -55,20 +55,21 @@
 
     <!-- Page Content -->
     <body>
-    <div class="container">
+    <div style="margin-top:50px;" class="col-sm-6 col-md-4 col-md-offset-4">
 
-        <form class="form-signin" id="form-singin" action="ServletNuevoLogin" method="post">
-        <h2 class="form-signin-heading">Bienvenido</h2>
-        <label for="inputUsername" class="sr-only">Direccion de correo</label>
-        <input type="text" name ="inputUsername" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus="">
+        <form class="form form-signup" id="form-singup" action="ServletNuevoUsuario" method="post" onsubmit=" return validaContraseña();">
+        <h2 class="form-signin-heading">Registrese</h2>
+        <label for="inputUsername" class="sr-only">Nombre</label>
+        <input type="text" name ="inputNombre" id="inputNombre" class="form-control" placeholder="Nombre" required="" autofocus="">
+        <label for="inputUsername" class="sr-only">Apellido</label>
+        <input type="text" name ="inputApellido" id="inputApellido" class="form-control" placeholder="Apellido" required="" autofocus="">
+        <label for="inputUsername" class="sr-only">Nombre de Usuario</label>
+        <input type="text" name ="inputUsername" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus="" onblur="existe()">
         <label for="inputPassword" class="sr-only">Contraseña</label>
         <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required="">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Recuerdame
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+        <label for="inputREPassword" class="sr-only">Repita Contraseña</label>
+        <input type="password" name="inputREPassword" id="inputREPassword" class="form-control" placeholder="Re-Password" required="">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
       </form>
         
     </div>
@@ -96,7 +97,49 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
+	<script type="text/javascript">
+	function validaContraseña()
+	{
+		if (inputPassword.value != inputREPassword.value) {
+			   alert('Comprobación no coincide con la contraseña');
+			   return false;
+			}
+			return true;
+		
+	}
 	
-
+	</script>
+	
+	<script type="text/javascript">
+	function existe()
+	{ 
+		var existe;
+		
+		$.ajax({ 
+			async: false,
+			type : 'POST',
+			data : "inputUsername="+inputUsername.value,
+			url  : 'existeUsuario.jsp',
+			success: function(data){ // Get the result and asign to each cases
+				
+				if(data==1)
+				{
+				//Ok
+					existe=true;
+					alert("Nombre de Usuario existente, ingrese otro");
+					inputUsername.focus();		
+				}
+				else
+				{ 	
+					existe=false;;
+				}
+				
+			}
+				
+			});
+		
+		return existe;
+	}
+	</script>
 
 </body></html>

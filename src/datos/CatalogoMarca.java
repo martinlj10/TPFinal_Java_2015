@@ -11,7 +11,7 @@ import modelos.Marca;
 
 public class CatalogoMarca {
 
-	private final static String CAMPOS = " cod_marca, descrip_marca";
+	private final static String CAMPOS = " cod_marca, descripcion_marca";
 	public static int AddMarca(Marca Marca)
 	{ //se cargan los autos
 		try{
@@ -51,7 +51,7 @@ public class CatalogoMarca {
 		}
 	public static int UpdateMarca (Marca MarcaUPD)
 	{
-		String SQLCons= "UPDATE Marca SET descrip_marca=? WHERE ?=cod_marca ";
+		String SQLCons= "UPDATE Marca SET descripcion_marca=? WHERE ?=cod_marca ";
 		try{
 			
 		ConexionBD conecta = new ConexionBD();
@@ -83,7 +83,7 @@ public class CatalogoMarca {
 			 	while(rta.next())
 						{		Marca MarcaDev = new Marca();
 					 			MarcaDev.setCod_marca(rta.getInt("cod_marca"));
-					 			MarcaDev.setDescrip_marca(rta.getString("descrip_marca"));
+					 			MarcaDev.setDescrip_marca(rta.getString("descripcion_marca"));
 								
 								MarcasAll.add(MarcaDev);
 								
@@ -95,7 +95,36 @@ public class CatalogoMarca {
 		return MarcasAll;
 	}
 
-	public static Marca GetOne(int pId)
+	public static Marca GetOne(String pNom_Marca)
+	{
+		
+		Marca MarcaDev = new Marca();
+		try{
+			
+		
+		String SQLCons= "SELECT "+CAMPOS+" FROM Marca WHERE descripcion_marca=?";
+		ConexionBD conecta = new ConexionBD();
+		conecta.OpenConection();
+		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
+		stmt.setString(1, pNom_Marca);		
+		ResultSet rta = stmt.executeQuery();
+		while(rta.next())
+		{
+					MarcaDev.setDescrip_marca(rta.getString("descripcion_marca"));
+		 			MarcaDev.setCod_marca(rta.getInt("cod_marca"));
+					
+											
+			}
+			rta.close();
+			stmt.close();
+			} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						
+								}
+		return MarcaDev;
+	}
+	public static Marca GetOneCod(int pCod_Marca)
 	{
 		
 		Marca MarcaDev = new Marca();
@@ -106,18 +135,18 @@ public class CatalogoMarca {
 		ConexionBD conecta = new ConexionBD();
 		conecta.OpenConection();
 		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
-		stmt.setInt(1, pId);		
+		stmt.setInt(1, pCod_Marca);		
 		ResultSet rta = stmt.executeQuery();
 		while(rta.next())
 		{
-					MarcaDev.setDescrip_marca(rta.getString("descrip_marca"));
+					MarcaDev.setDescrip_marca(rta.getString("descripcion_marca"));
 		 			MarcaDev.setCod_marca(rta.getInt("cod_marca"));
 					
-					rta.close();
-					stmt.close();
-						
-						
-			}} catch (SQLException e) {
+											
+			}
+			rta.close();
+			stmt.close();
+			} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 						

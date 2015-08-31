@@ -76,5 +76,14 @@ public class Auto {
 	public void setCod_marca(int cod_marca) {
 		this.cod_marca = cod_marca;
 	}
-	
+
+	private String imagen;
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
 }

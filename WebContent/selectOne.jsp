@@ -139,6 +139,7 @@
                         <h4 class="pull-right">U$D <%=AutoSel.getPrecio() %></h4>
                         <p><%=AutoSel.getNombre_auto()%></p>
                         <p><%=AutoSel.getDescripcionAuto() %></p>
+                        
                         </div>
                     <div class="ratings">
                         <p class="pull-right"><%=ControladorComentario.getAll(AutoSel.getCod_auto()).size()%>Comentarios</p>
@@ -200,11 +201,9 @@
                                 	   			<%} %>
                                    <%for(int m=0;m<(5-ValoracionCom);m++){ %>
                                 	<span class="glyphicon glyphicon-star-empty"></span>
-                                	<%} 
-                                	session.getAttribute("usuario");
-                                	%>
+                                	<% }%>
                             
-                            <span class="pull-right"><%comentario.get(i).getFecha_public(); %></span>
+                            <span class="pull-right"><a><%=comentario.get(i).getNom_usuario()%>  //  <%=comentario.get(i).getFecha_public()%></a></span>
                             <p>Comentario:<%=comentario.get(i).getComentario() %></p>
                         </div>
                     </div>

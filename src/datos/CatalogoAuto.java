@@ -11,12 +11,12 @@ import modelos.Auto;
 
 public class CatalogoAuto {
 
-	private final static String CAMPOS = " cod_auto, descripcion, precio_sug, valoracion, nombre_auto, cod_marca, ano_fabric";
+	private final static String CAMPOS = " cod_auto, descripcion, precio_sug, valoracion, nombre_auto, cod_marca, ano_fabric, imagen";
 	public static int AddAuto(Auto Auto)
 	{ //se cargan los autos
 		try{
 			
-			String SQLCons= "INSERT INTO Auto ("+CAMPOS+") VALUES (?,?,?,?,?,?,?)"; 
+			String SQLCons= "INSERT INTO Auto ("+CAMPOS+") VALUES (?,?,?,?,?,?,?,?)"; 
 	ConexionBD conecta = new ConexionBD();
 	conecta.OpenConection();
 	PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
@@ -27,6 +27,7 @@ public class CatalogoAuto {
 	stmt.setString(5, Auto.getNombre_auto());
 	stmt.setInt(6, Auto.getCod_marca());
 	stmt.setInt(7, Auto.getAnoFabricacion());
+	stmt.setString(8, Auto.getImagen());
 	
 	stmt.execute();
 	
@@ -55,7 +56,7 @@ public class CatalogoAuto {
 		}
 	public static int UpdateAuto (Auto AutoUPD)
 	{
-		String SQLCons= "UPDATE Auto SET descripcion=? , precio_sug=?, valoracion=?, nombre_auto=?, cod_marca=?, ano_fabric=? WHERE ?=cod_auto ";
+		String SQLCons= "UPDATE Auto SET descripcion=? , precio_sug=?, valoracion=?, nombre_auto=?, cod_marca=?, ano_fabric=?, imagen=? WHERE ?=cod_auto ";
 		try{
 			
 		ConexionBD conecta = new ConexionBD();
@@ -67,7 +68,8 @@ public class CatalogoAuto {
 		stmt.setString(4, AutoUPD.getNombre_auto());
 		stmt.setInt(5, AutoUPD.getCod_marca());
 		stmt.setInt(6, AutoUPD.getAnoFabricacion());
-		stmt.setInt(7, AutoUPD.getCod_auto());
+		stmt.setString(7, AutoUPD.getImagen());
+		stmt.setInt(8, AutoUPD.getCod_auto());
 		
 		int rta = stmt.executeUpdate();
 		}		
@@ -98,6 +100,7 @@ public class CatalogoAuto {
 								AutoDev.setNombre_auto(rta.getString("nombre_auto"));
 								AutoDev.setCod_marca(rta.getInt("cod_marca"));
 								AutoDev.setAnoFabricacion(rta.getInt("ano_fabric"));
+								AutoDev.setImagen(rta.getString("imagen"));
 								
 								AutosAll.add(AutoDev);
 								
@@ -132,6 +135,7 @@ public class CatalogoAuto {
 					AutoDev.setNombre_auto(rta.getString("nombre_auto"));
 					AutoDev.setCod_marca(rta.getInt("cod_marca"));
 					AutoDev.setAnoFabricacion(rta.getInt("ano_fabric"));
+					AutoDev.setImagen(rta.getString("imagen"));
 		}
 					rta.close();
 					stmt.close();
@@ -163,7 +167,69 @@ public class CatalogoAuto {
 				}
 				return Statement.RETURN_GENERATED_KEYS;
 	}
+	public static ArrayList<Auto> GetAllxMarca(int pCod_Marca)
+	{
+	ArrayList<Auto> AutosAll = new ArrayList<Auto>();
 		
+		try {
+			String SQLCons= "Select "+CAMPOS+" FROM Auto Where cod_marca=?";
+			ConexionBD conecta = new ConexionBD();
+			conecta.OpenConection();
+			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
+			stmt.setInt(1, pCod_Marca);
+			ResultSet rta = stmt.executeQuery();
+			 	while(rta.next())
+						{		Auto AutoDev = new Auto();
+					 			AutoDev.setDescripcionAuto(rta.getString("descripcion"));
+					 			AutoDev.setCod_auto(rta.getInt("cod_auto"));
+								AutoDev.setPrecio(rta.getFloat("precio_sug"));						
+								AutoDev.setValoracion(rta.getInt("valoracion"));
+								AutoDev.setNombre_auto(rta.getString("nombre_auto"));
+								AutoDev.setCod_marca(rta.getInt("cod_marca"));
+								AutoDev.setAnoFabricacion(rta.getInt("ano_fabric"));
+								AutoDev.setImagen(rta.getString("imagen"));
+								AutosAll.add(AutoDev);
+								
+				}
+		}catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		return AutosAll;
+	}
+	public static ArrayList<Auto> GetAllxPrecios(float pPrecio_min, float pPrecio_max)
+	{
+	ArrayList<Auto> AutosAll = new ArrayList<Auto>();
+		
+		try {
+			String SQLCons= "Select "+CAMPOS+" FROM Auto Where (precio_sug>? AND precio_sug<?)";
+			ConexionBD conecta = new ConexionBD();
+			conecta.OpenConection();
+			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
+			stmt.setFloat(1, pPrecio_min);
+			stmt.setFloat(2, pPrecio_max);
+			ResultSet rta = stmt.executeQuery();
+			 	while(rta.next())
+						{		Auto AutoDev = new Auto();
+					 			AutoDev.setDescripcionAuto(rta.getString("descripcion"));
+					 			AutoDev.setCod_auto(rta.getInt("cod_auto"));
+								AutoDev.setPrecio(rta.getFloat("precio_sug"));						
+								AutoDev.setValoracion(rta.getInt("valoracion"));
+								AutoDev.setNombre_auto(rta.getString("nombre_auto"));
+								AutoDev.setCod_marca(rta.getInt("cod_marca"));
+								AutoDev.setAnoFabricacion(rta.getInt("ano_fabric"));
+								AutoDev.setImagen(rta.getString("imagen"));
+								AutosAll.add(AutoDev);
+								
+				}
+		}catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		return AutosAll;
+	}
+	
+	
 	}
 	
 	

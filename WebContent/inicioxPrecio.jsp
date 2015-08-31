@@ -40,22 +40,36 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
-                    
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="inicio.jsp">Coment@utos</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                     </ul>
+                    <li>
+                        <a href="#">Acerca de</a>
+                    </li>
+                    <li>
+                        <a href="#">Servicios</a>
+                    </li>
+                    <li>
+                        <a href="#">Contacto</a>
+                    </li>
+                    </ul>
                     <div class="pull-right">
                     <% 
-    ArrayList<Auto> AutosAll = new ArrayList<Auto>();
-    AutosAll = ControladorAuto.getAll();
-	ArrayList<Marca> MarcasAll = new ArrayList<Marca>();            		
-    MarcasAll = CatalogoMarca.GetAll();                
-    
-    String usuario ="";                        
+     ArrayList<Auto> AutosAll = new ArrayList<Auto>();
+                 		
+
+float PrecioMin = Float.parseFloat(session.getAttribute("precio_minimo").toString());
+float PrecioMax = Float.parseFloat(session.getAttribute("precio_maximo").toString());
+AutosAll = ControladorAuto.getAllxPrecio(PrecioMin, PrecioMax);
+ArrayList<Marca> MarcasAll = new ArrayList<Marca>();            		
+MarcasAll = CatalogoMarca.GetAll();
+     String usuario ="";                        
     try{ 
     if(session.getAttribute("usuario") != null){
         usuario = (String)"<b>"+session.getAttribute("usuario")+"</b>";
@@ -76,7 +90,7 @@
     { 
 %>    	
 					<a class="navbar-brand" href="nuevologin.jsp">Login</a>
-					<a class="navbar-brand" href="SingUp.jsp">Registrarse</a>
+					<a class="navbar-brand" href="signin.jsp">Registrarse</a>
 <% 
     }
     }catch(NullPointerException ex){} 
@@ -90,13 +104,16 @@
 
     <!-- Page Content -->
     <div class="container">
-
+		<form id="FormFiltro" action="ServletFiltraxPrecio" method ="post">
         <div class="row">
-
+			
             <div class="col-md-3" float=left>
                 <p class="lead">Rosario Comenta</p>
                 
-                  <div class="form-group">
+                 <div class="form-group">
+                               
+                                </div>
+                              <div class="form-group">
                                
                                 <select name="marcas" class="form-control" onchange="location=this.value">
                                     <option value="inicio.jsp">Seleccione marca</option>
@@ -107,22 +124,23 @@
                             </div>
                             <form id="FormFiltro" action="ServletFiltraxPrecio" method ="post" onsubmit="return validaCampos();">
                             <div>
-                            <p><b>Filtro por Precio</b></p>
-                            <div class="col-xs-6">
+                            <p>Filtro por Precio</p>
+                                
+                                <div class="col-xs-6">
   								<label for="ValueMin">Valor Minimo</label>
-  								<input class="form-control" id="ValueMin"  name="ValueMin"type="text" onkeypress="return justNumbers(event);">
+  								<input class="form-control" id="ValueMin" name="ValueMin" type="number" onkeypress="return justNumbers(event);">
 								<label for="ValueMax">Valor Maximo</label>
-  								<input class="form-control" id="ValueMax" name="ValueMax" type="text" onkeypress="return justNumbers(event);">
+  								<input class="form-control" id="ValueMax" name="ValueMax" type="number" onkeypress="return justNumbers(event);">
 								<div class="filter range pricerange">
 								<br>
-								<button type="submit" class="btn btn-primary btn-sm">Filtrar</button>
+								<button type="submit" class="btn btn-primary btn-sm" >Filtrar</button>
 								</div>
 							</div>
 							</div>
 							</form>
                            
             </div>
-
+			</form>
             <div class="col-md-9">
 
                 <div class="row carousel-holder">
@@ -162,7 +180,7 @@
                     
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <img src="img/<%=AutosAll.get(i).getImagen()%>" WIDTH="320" HEIGHT="150" alt="">
+                            <img src="img/<%=AutosAll.get(i).getImagen()%>" alt="">
                             <div class="caption">
                                 <h4><a id="cod_auto" href="selectOne.jsp?cod_auto=<%=AutosAll.get(i).getCod_auto()%>"><%=CatalogoMarca.GetOneCod(AutosAll.get(i).getCod_marca()).getDescrip_marca()%>-<%=AutosAll.get(i).getNombre_auto() %></a>
                                 </h4>
@@ -193,7 +211,7 @@
             </div>
 
         </div>
-
+</form>
     </div>
     <!-- /.container -->
 
@@ -242,7 +260,4 @@ function validaCampos()
 	}
 
 </script>
-
-
-
 </body></html>

@@ -24,10 +24,10 @@ public class ControladorMarca {
 		
 	}
 
-	public static Marca getOne(int pIdMarca)
+	public static Marca getOne(String pNomMarca)
 	{
 		Marca MarcaDev = new Marca();/*Crea la estructura de la marca a devolver*/
-		MarcaDev = CatalogoMarca.GetOne(pIdMarca);/*Obtiene la marca a devolver por Id*/
+		MarcaDev = CatalogoMarca.GetOne(pNomMarca);/*Obtiene la marca a devolver por Id*/
 		
 		return MarcaDev;
 	}

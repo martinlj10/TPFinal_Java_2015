@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane; 
 
+import datos.CatalogoMarca;
 import datos.CatalogoUsuarios;
 import modelos.Usuario;
 
 public class ControladorUsuario {
 	
 
-datos.CatalogoUsuarios catUsuarios;
-Usuario user = new Usuario();	
+static datos.CatalogoUsuarios catUsuarios;
+static Usuario user = new Usuario();	
 
 
 public ControladorUsuario(){
@@ -21,7 +22,14 @@ public ControladorUsuario(){
 }
 
 
-public Usuario getUsuario(String pUsername)
+public static int AddUsuario(Usuario user)
+{
+	int idNuevoUsuario = CatalogoUsuarios.AddUsuario(user);
+	
+	return idNuevoUsuario;	
+}
+
+public static Usuario getUsuario(String pUsername)
 {
 	
 	user =CatalogoUsuarios.GetOne(pUsername);
@@ -29,14 +37,23 @@ public Usuario getUsuario(String pUsername)
 	return(user);	
 	
 	}
-	
+public static boolean existe(String pUsername)
+	{
+	  Usuario existUs = new Usuario();
+	 existUs = CatalogoUsuarios.GetOne(pUsername);
+	 if(existUs.getUsername()== null)
+	 
+		 return false;
+	 	 else
+		 return true;
+	}
 
 
 
-public boolean validarUsuario(String pUsername, String pPassword)
+public static boolean validarUsuario(String pUsername, String pPassword)
 {
 	
-	user = this.getUsuario(pUsername);
+	user = ControladorUsuario.getUsuario(pUsername);
 	String nombreUsuario = user.getUsername();
 	String contrasena = user.getPassword();
 	if(nombreUsuario.equalsIgnoreCase(pUsername) && contrasena.equalsIgnoreCase(pPassword))

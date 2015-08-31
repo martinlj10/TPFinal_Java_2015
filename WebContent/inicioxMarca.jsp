@@ -1,7 +1,5 @@
-
 <%@page import="modelos.Marca"%>
 <%@page import="datos.CatalogoMarca"%>
-<%@page import="datos.CatalogoAuto"%>
 <%@page import="negocio.ControladorComentario"%>
 <%@page import="negocio.ControladorAuto"%>
 <%@page import="modelos.Auto"%>
@@ -40,21 +38,35 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
-                    
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="inicio.jsp">Coment@utos</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                     </ul>
+                    <li>
+                        <a href="#">Acerca de</a>
+                    </li>
+                    <li>
+                        <a href="#">Servicios</a>
+                    </li>
+                    <li>
+                        <a href="#">Contacto</a>
+                    </li>
+                    </ul>
                     <div class="pull-right">
                     <% 
     ArrayList<Auto> AutosAll = new ArrayList<Auto>();
-    AutosAll = ControladorAuto.getAll();
-	ArrayList<Marca> MarcasAll = new ArrayList<Marca>();            		
-    MarcasAll = CatalogoMarca.GetAll();                
-    
+    Marca MarcaSelec = new Marca();        		
+    MarcaSelec = CatalogoMarca.GetOne((String)request.getParameter("nom_marca"));        		
+    AutosAll = ControladorAuto.getAllxMarca(MarcaSelec.getCod_marca());
+    ArrayList<Marca> MarcasAll = new ArrayList<Marca>();            		
+    MarcasAll = CatalogoMarca.GetAll();
+                    
+                    
     String usuario ="";                        
     try{ 
     if(session.getAttribute("usuario") != null){
@@ -76,7 +88,7 @@
     { 
 %>    	
 					<a class="navbar-brand" href="nuevologin.jsp">Login</a>
-					<a class="navbar-brand" href="SingUp.jsp">Registrarse</a>
+					<a class="navbar-brand" href="signin.jsp">Registrarse</a>
 <% 
     }
     }catch(NullPointerException ex){} 
@@ -96,8 +108,9 @@
             <div class="col-md-3" float=left>
                 <p class="lead">Rosario Comenta</p>
                 
-                  <div class="form-group">
+                 <div class="form-group">
                                
+                                              
                                 <select name="marcas" class="form-control" onchange="location=this.value">
                                     <option value="inicio.jsp">Seleccione marca</option>
                                     <%for(int h=0; h<MarcasAll.size();h++){ %>
@@ -107,12 +120,12 @@
                             </div>
                             <form id="FormFiltro" action="ServletFiltraxPrecio" method ="post" onsubmit="return validaCampos();">
                             <div>
-                            <p><b>Filtro por Precio</b></p>
+                            <p>Filtro por Precio</p>
                             <div class="col-xs-6">
   								<label for="ValueMin">Valor Minimo</label>
   								<input class="form-control" id="ValueMin"  name="ValueMin"type="text" onkeypress="return justNumbers(event);">
 								<label for="ValueMax">Valor Maximo</label>
-  								<input class="form-control" id="ValueMax" name="ValueMax" type="text" onkeypress="return justNumbers(event);">
+  								<input class="form-control" id="ValueMax" name="ValueMax" type="text"onkeypress="return justNumbers(event);">
 								<div class="filter range pricerange">
 								<br>
 								<button type="submit" class="btn btn-primary btn-sm">Filtrar</button>
@@ -120,7 +133,7 @@
 							</div>
 							</div>
 							</form>
-                           
+                  
             </div>
 
             <div class="col-md-9">
@@ -162,13 +175,14 @@
                     
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <img src="img/<%=AutosAll.get(i).getImagen()%>" WIDTH="320" HEIGHT="150" alt="">
+                            <img src="http://placehold.it/320x150" WIDTH=320 HEIGHT=150 alt="">
                             <div class="caption">
                                 <h4><a id="cod_auto" href="selectOne.jsp?cod_auto=<%=AutosAll.get(i).getCod_auto()%>"><%=CatalogoMarca.GetOneCod(AutosAll.get(i).getCod_marca()).getDescrip_marca()%>-<%=AutosAll.get(i).getNombre_auto() %></a>
                                 </h4>
                                 <p><%=AutosAll.get(i).getDescripcionAuto()%></p>
                                 <br>
                                 <h4 class="pull-right">U$D<%=AutosAll.get(i).getPrecio() %></h4>
+                                                               
                             </div>
                             <div class="ratings">
                                 <p class="pull-right"><%=ControladorComentario.getAll(AutosAll.get(i).getCod_auto()).size() %> Comentarios</p>
@@ -242,7 +256,4 @@ function validaCampos()
 	}
 
 </script>
-
-
-
 </body></html>
