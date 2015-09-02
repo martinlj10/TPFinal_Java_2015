@@ -104,37 +104,56 @@
     <div class="container">
 
         <div class="row">
-
-            <div class="col-md-3" float=left>
-                <p class="lead">Rosario Comenta</p>
-                
-                 <div class="form-group">
-                               
-                                              
-                                <select name="marcas" class="form-control" onchange="location=this.value">
+ 				<div class="col-md-3" float=left>
+                <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Rosario Comenta-Búsqueda</h3>
+                            </div>
+                            <div class="panel-body">
+                               <p><b>**Por marca**</b></p>
+                                
+                                <div class="form-group">
+                               <select name="marcas" class="form-control" onchange="location=this.value">
                                     <option value="inicio.jsp">Seleccione marca</option>
                                     <%for(int h=0; h<MarcasAll.size();h++){ %>
                                     <option value ="inicioxMarca.jsp?nom_marca=<%=MarcasAll.get(h).getDescrip_marca()%>"> <%=MarcasAll.get(h).getDescrip_marca()%></option>
                                   	        	<%} %>
                                 </select>
+                                
                             </div>
-                            <form id="FormFiltro" action="ServletFiltraxPrecio" method ="post" onsubmit="return validaCampos();">
+                          
+                              <form id="FormFiltro" action="ServletFiltraxPrecio" method ="post" onsubmit="return validaCampos();">
                             <div>
-                            <p>Filtro por Precio</p>
-                            <div class="col-xs-6">
-  								<label for="ValueMin">Valor Minimo</label>
-  								<input class="form-control" id="ValueMin"  name="ValueMin"type="text" onkeypress="return justNumbers(event);">
-								<label for="ValueMax">Valor Maximo</label>
-  								<input class="form-control" id="ValueMax" name="ValueMax" type="text"onkeypress="return justNumbers(event);">
-								<div class="filter range pricerange">
-								<br>
-								<button type="submit" class="btn btn-primary btn-sm">Filtrar</button>
-								</div>
+                            <p><b>**Por Precio**</b></p>
+                            <label for="ValueMin">Valor Minimo</label>
+                            <div class="input-group">
+  								<span class="input-group-addon">$</span>
+ 								<input class="form-control" id="ValueMin"  name="ValueMin"type="text" onkeypress="return justNumbers(event);">
+  			
 							</div>
+							<label for="ValueMax">Valor Maximo</label>
+							<div class="input-group">
+  								<span class="input-group-addon">$</span>
+ 								<input class="form-control" id="ValueMax" name="ValueMax" type="text" onkeypress="return justNumbers(event);">
+							</div>
+  							<div class="filter range pricerange col-md-offset-4">
+							<br>
+							
+							<button type="submit" class="btn btn-primary btn-md">Filtrar</button>
+							</div>
+							
 							</div>
 							</form>
+                 
+                   </div>
+                        </div>
+                
                   
+                          
+                           
             </div>
+
+           
 
             <div class="col-md-9">
 
