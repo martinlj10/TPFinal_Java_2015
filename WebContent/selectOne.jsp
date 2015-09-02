@@ -22,6 +22,9 @@
 
     <!-- Custom CSS -->
     <link href="css/shop-item.css" rel="stylesheet">
+    <link href="css/calificacion.css" rel="stylesheet">
+    
+    
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -123,6 +126,7 @@
         <div class="row">
 
             <div class="col-md-3">
+            
                 <p class="lead">Shop Name</p>
                 <div class="list-group">
                     <a href="#" class="list-group-item active">Category 1</a>
@@ -180,14 +184,26 @@
       <label for="comment">Comentar:</label>
       <textarea class="form-control" rows="5" id="comment" name ="comment"></textarea>
 		  </div>
+		   <div>
+		   <p>Calificacion arreglar</p>
+		   <span class="star-rating">
+ 			 <input type="radio" name="rating" value="1"><i></i>
+ 			 <input type="radio" name="rating" value="2"><i></i>
+ 			 <input type="radio" name="rating" value="3"><i></i>
+ 			 <input type="radio" name="rating" value="4"><i></i>
+ 			 <input type="radio" name="rating" value="5"><i></i>
+			</span>
+			<strong class="choice">Choose a rating</strong>
+		  
+      		
+		</div>
          </form> 
         </div>
        <div class="modal-footer">
          
           <button id ="btnComment" type="button" onclick="comentar()" class="btn btn-primary" data-dismiss="modal" >Comentar</button>
-        
-        
         </div>
+       
       </div>
     </div>
   </div>
@@ -240,6 +256,14 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    
+<script>
+$(':radio').change(
+		  function(){
+		    $('.choice').text( this.value + ' stars' );
+		  } 
+		)
+</script>
 <script type="text/javascript">
 function comentar()
 {
