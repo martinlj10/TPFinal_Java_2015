@@ -272,12 +272,13 @@ $(':radio').change(
 function comentar()
 {
 	
+  
 	var ruta= "GuardaComentario.jsp";
 	$.ajax({
 			async: false,
 			url: ruta,
 			type: "POST",
-			data: "comment="+comment.value+"&cod_auto="+cod_auto.value+"rating="+votacion.value,
+			data: "comment="+comment.value+"&cod_auto="+cod_auto.value+"&rating="+votacion.value,
 			success: function(datos)
 			{ 
 				if(datos!="")
