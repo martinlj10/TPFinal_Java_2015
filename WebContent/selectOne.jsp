@@ -213,7 +213,7 @@
                     <%for(int i=0; i<comentario.size();i++){ %>
 			        <div class="row">
                         <div class="col-md-12">
-                            <%int ValoracionCom = AutoSel.getValoracion();
+                            <%int ValoracionCom = comentario.get(i).getVoto();
                                     for(int j=0; j<ValoracionCom;j++){ %>
                                    <span class="glyphicon glyphicon-star"></span>
                                 	   			<%} %>

@@ -29,6 +29,21 @@ public class CatalogoComentario {
 	
 	stmt.execute();
 	
+	///Esto actualiza la valoracion del auto
+	String SQLCons2="SELECT AVG(voto) as prom from comentario where ?=cod_auto";
+	PreparedStatement stmt2= conecta.Cone.prepareStatement(SQLCons2);
+	stmt2.setInt(1, newComentario.getCod_auto());
+	ResultSet rta = stmt2.executeQuery();
+	rta.first();
+	Double prome=rta.getDouble("prom");
+	int y = (int)Math.round(prome);
+	
+	String SQLCons3= "UPDATE auto SET valoracion=? WHERE ?=cod_auto";
+	PreparedStatement stmt3=conecta.Cone.prepareStatement(SQLCons3);
+	stmt3.setInt(1, y);
+	stmt3.setInt(2, newComentario.getCod_auto());
+	stmt3.execute();
+	
 	conecta.CloseConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -47,6 +62,7 @@ public class CatalogoComentario {
 			stmt.setString(1, pNom_Usuario);
 			stmt.setDate(1, pFecha_public); 
 			int rta = stmt.executeUpdate();
+			
 			
 					} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -94,6 +110,7 @@ public class CatalogoComentario {
 								comentarioDev.setNom_usuario(rta.getString("nombreUsuario"));						
 								comentarioDev.setFecha_public(rta.getDate("fecha_public"));
 								comentarioDev.setComentario(rta.getString("comentario"));
+								comentarioDev.setVoto(rta.getInt("voto"));
 								ComentariosAll.add(comentarioDev);
 								
 				}
