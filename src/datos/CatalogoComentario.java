@@ -18,7 +18,7 @@ public class CatalogoComentario {
 		try{
 			//Agrega un comentario a la Tabla Comentarios 
 		String SQLCons= "INSERT INTO comentario ("+CAMPOS+")"+ " VALUES (?,?,NOW(),?,?)";
-		JOptionPane.showMessageDialog(null, newComentario.getVoto());
+	
 	ConexionBD conecta = new ConexionBD();
 	conecta.OpenConection();
 	PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);

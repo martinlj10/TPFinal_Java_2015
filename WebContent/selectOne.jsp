@@ -263,7 +263,7 @@
 $(':radio').change(
 		  function(){
 		
-		$('.choice').text( this.value);
+		//$('.choice').text( this.value);
 		 document.getElementById('votacion').value=this.value;  	
 		  } 
 		)
