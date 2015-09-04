@@ -6,6 +6,8 @@ import datos.*;
 
 import java.sql.*;
 
+import javax.swing.JOptionPane;
+
 
 public class ControladorComentario {
 
@@ -14,7 +16,7 @@ public class ControladorComentario {
 	public static int AddComentario(Comentario nuevoComentario)
 	{
 		//Validaciones de Negocio
-		
+		JOptionPane.showMessageDialog(null, nuevoComentario.getVoto());
 		int idComentarioNuevo = CatalogoComentario.AddComentario(nuevoComentario);
 		
 		return idComentarioNuevo;

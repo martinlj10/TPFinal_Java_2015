@@ -48,6 +48,7 @@ private static final long serialVersionUID = 1L;
 		java.sql.Date fechaSQL = new java.sql.Date(fechaComentario.getTime());
 		nuevoComentario.setFecha_public((fechaSQL));
 		nuevoComentario.setComentario(request.getParameter("comment"));
+		nuevoComentario.setVoto(Integer.parseInt(request.getParameter("radio")));
 				
 		try{
 		ControladorComentario.AddComentario(nuevoComentario);

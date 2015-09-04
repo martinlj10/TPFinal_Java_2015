@@ -70,6 +70,7 @@
     try{ 
     if(session.getAttribute("usuario") != null){
         currentusuario = (String)"<b>"+session.getAttribute("usuario")+"</b>";
+     
         
    
   
@@ -185,15 +186,16 @@
       <textarea class="form-control" rows="5" id="comment" name ="comment"></textarea>
 		  </div>
 		   <div>
-		   <p>Calificacion arreglar</p>
+		   
+		   <strong class="choice" ></strong>
 		   <span class="star-rating">
- 			 <input type="radio" name="rating" value="1"><i></i>
- 			 <input type="radio" name="rating" value="2"><i></i>
- 			 <input type="radio" name="rating" value="3"><i></i>
- 			 <input type="radio" name="rating" value="4"><i></i>
- 			 <input type="radio" name="rating" value="5"><i></i>
+ 			 <input type="radio" name="rating"  value="1" checked><i></i>
+ 			 <input type="radio" name="rating"  value="2"><i></i>
+ 			 <input type="radio" name="rating"  value="3"><i></i>
+ 			 <input type="radio" name="rating"  value="4"><i></i>
+ 			 <input type="radio" name="rating"  value="5"><i></i>
 			</span>
-			<strong class="choice">Choose a rating</strong>
+			<input type="hidden" id="votacion" value="1"/>
 		  
       		
 		</div>
@@ -260,7 +262,9 @@
 <script>
 $(':radio').change(
 		  function(){
-		    $('.choice').text( this.value + ' stars' );
+		
+		$('.choice').text( this.value);
+		 document.getElementById('votacion').value=this.value;  	
 		  } 
 		)
 </script>
@@ -273,11 +277,12 @@ function comentar()
 			async: false,
 			url: ruta,
 			type: "POST",
-			data: "comment="+comment.value+"&cod_auto="+cod_auto.value,
+			data: "comment="+comment.value+"&cod_auto="+cod_auto.value+"rating="+votacion.value,
 			success: function(datos)
 			{ 
 				if(datos!="")
 					{
+					
 					window.location.reload();
 					}
 				else

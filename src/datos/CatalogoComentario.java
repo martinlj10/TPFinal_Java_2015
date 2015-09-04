@@ -7,21 +7,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import modelos.Comentario;
 
 public class CatalogoComentario {
-	private final static String CAMPOS = " cod_auto, nombreUsuario, fecha_public, comentario";
+	private final static String CAMPOS = " cod_auto, nombreUsuario, fecha_public, comentario, voto";
 	public static int AddComentario(Comentario newComentario)
 	{
 		try{
 			//Agrega un comentario a la Tabla Comentarios 
-		String SQLCons= "INSERT INTO comentario ("+CAMPOS+")"+ " VALUES (?,?,NOW(),?)";
+		String SQLCons= "INSERT INTO comentario ("+CAMPOS+")"+ " VALUES (?,?,NOW(),?,?)";
+		JOptionPane.showMessageDialog(null, newComentario.getVoto());
 	ConexionBD conecta = new ConexionBD();
 	conecta.OpenConection();
 	PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
 	stmt.setInt(1,newComentario.getCod_auto());
 	stmt.setString(2, newComentario.getNom_usuario());
 	stmt.setString(3, newComentario.getComentario());
+	stmt.setInt(4,newComentario.getVoto());
 	
 	stmt.execute();
 	
