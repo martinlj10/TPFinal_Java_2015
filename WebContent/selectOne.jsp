@@ -157,8 +157,13 @@
                     } else if(Integer.parseInt(session.getAttribute("cod_rol").toString())==2){%>
                     	<div class="text-right">
                     	  	<button type="button" class="btn btn-info btn-lg" onclick="setModalComentario(<%=AutoSel.getCod_auto()%>)" data-toggle="modal" data-target="#myModalModific">Editar</button>
-                   		                  		
-                   <% } } %>
+                   		    <button type="button" class="btn btn-info btn-lg" onclick="setModalComentario(<%=AutoSel.getCod_auto()%>)" data-toggle="modal" data-target="#myModalEliminar">Eliminar</button>              		
+                   <% }}else 
+                	   {%>
+                	   <div class="text-right">
+               	  	<a class="btn btn-info btn-lg" href="nuevologin.jsp">Logueate para comentar</a>
+                	  <% } %>
+                	   
                     </div>
 
  <!-- Modal Comentar -->
@@ -257,6 +262,36 @@
        <div class="modal-footer">
          
           <button id ="btnModific" type="button" onclick="modificar()" class="btn btn-primary" data-dismiss="modal" >Modificar</button>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  	
+  	<!-- Modal Eliminar -->
+
+
+<div class="modal fade" id="myModalEliminar" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Elimina el auto seleccionado</h4>
+        </div>
+        <div class="modal-body">
+		<form id="comentario">
+		<input id="cod_auto" name="cod_auto" hidden />      
+        <div class="form-group">
+      
+      <label for="EliminaAuto">¿Esta seguro que desea eliminar el auto seleccionado??</label>
+        </div>
+		   
+         </form> 
+        </div>
+       <div class="modal-footer">
+         
+          <button id ="btnConfirma" type="button" onclick="eliminar()" class="btn btn-primary" data-dismiss="modal" >Confirmar</button>
+          <button id ="btnCancela" type="button" onclick="this.close()" class="btn btn-primary" data-dismiss="modal" >Cancelar</button>
         </div>
        
       </div>
@@ -376,6 +411,43 @@ return true;
  
 return /\d/.test(String.fromCharCode(keynum));
 } </script>
+<script type="text/javascript">
+function eliminar()
+{
+	
+  
+	var ruta= "EliminaAuto.jsp";
+	$.ajax({
+			async: false,
+			url: ruta,
+			type: "POST",
+			data: "cod_auto="+cod_auto.value,
+			success: function(datos)
+			{ 
+				if(datos!="")
+					{
+					
+					
+					document.location.href='inicio.jsp';
+					}
+				else
+					{
+					alert("Ha ocurrido un error, reintente");
+					}
+				
+			}
+		
+	});
+
+}
+function setModalComentario(codigoAuto)
+{
+	cod_auto.value = codigoAuto;
+	}
+
+
+</script>
+
 
 <script type="text/javascript">
 function validaDes()
