@@ -1,3 +1,5 @@
+<%@page import="modelos.Usuario"%>
+<%@page import="negocio.ControladorUsuario"%>
 <%@page import="datos.CatalogoComentario"%>
 <%@page import="modelos.Comentario"%>
 <%@page import="java.awt.Window"%>
@@ -54,26 +56,16 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
+                   
                 </ul>
                 <div class="pull-right">
                     <% 
-    String currentusuario ="";                        
-    try{ 
+    String currentusuario =""; 
+    
+	try{ 
     if(session.getAttribute("usuario") != null){
         currentusuario = (String)"<b>"+session.getAttribute("usuario")+"</b>";
-     
-        
-   
-  
+     	
 %>
 <br>
                    <li class="dropdown">
@@ -88,7 +80,7 @@
     { 
 %>    	
 					<a class="navbar-brand" href="nuevologin.jsp">Login</a>
-					<a class="navbar-brand" href="signin.jsp">Registrarse</a>
+					<a class="navbar-brand" href="SignUp.jsp">Registrarse</a>
 <% 
     }
     }catch(NullPointerException ex){} 
@@ -128,18 +120,13 @@
 
             <div class="col-md-3">
             
-                <p class="lead">Shop Name</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
-                </div>
+                
             </div>
 
             <div class="col-md-9">
 
                 <div class="thumbnail">
-                    <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+                    <img class="img-responsive" src="img/<%=AutoSel.getImagen()%>" alt="">
                     <div class="caption-full">
                         <h4 class="pull-right">U$D <%=AutoSel.getPrecio() %></h4>
                         <p><%=AutoSel.getNombre_auto()%></p>
@@ -160,14 +147,21 @@
 
                 <div class="well">
 	
-					<% if(session.getAttribute("usuario")!= null){ %>
+					<% if (session.getAttribute("cod_rol") != null){
+					if(Integer.parseInt(session.getAttribute("cod_rol").toString())==1){ %>
                     <div class="text-right">
                         
                        <button type="button" class="btn btn-info btn-lg" onclick="setModalComentario(<%=AutoSel.getCod_auto()%>)" data-toggle="modal" data-target="#myModal">Deja tu Comentario</button>
-                    <% } else {} %>
+                       
+                    <% 
+                    } else if(Integer.parseInt(session.getAttribute("cod_rol").toString())==2){%>
+                    	<div class="text-right">
+                    	  	<button type="button" class="btn btn-info btn-lg" onclick="setModalComentario(<%=AutoSel.getCod_auto()%>)" data-toggle="modal" data-target="#myModalModific">Editar</button>
+                   		                  		
+                   <% } } %>
                     </div>
 
- <!-- Modal -->
+ <!-- Modal Comentar -->
 
 
 <div class="modal fade" id="myModal" role="dialog">
@@ -235,6 +229,41 @@
         </div>
 
     </div>
+    
+<!-- Modal Modificar -->
+
+
+<div class="modal fade" id="myModalModific" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modificar</h4>
+        </div>
+        <div class="modal-body">
+		<form id="comentario">
+		<input id="cod_auto" name="cod_auto" hidden />      
+        <div class="form-group">
+      
+      <label for="Descripcion">Descripcion:</label>
+      <textarea class="form-control" rows="2" id="descripcion" name ="descripcion" required="" autofocus="" onblur="validaDes();"></textarea>
+	  <label for="precio">Precio:</label>
+      <input class="form-control" id="precio" name ="precio" onkeypress="return justNumbers(event);" required="" onblur="validaPre();">
+		  
+		  </div>
+		   
+         </form> 
+        </div>
+       <div class="modal-footer">
+         
+          <button id ="btnModific" type="button" onclick="modificar()" class="btn btn-primary" data-dismiss="modal" >Modificar</button>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  		         
+    
     <!-- /.container -->
 
     <div class="container">
@@ -303,7 +332,84 @@ function setModalComentario(codigoAuto)
 
 
 </script>
+<script type="text/javascript">
+function modificar()
+{
+	
+  
+	var ruta= "ModificaAuto.jsp";
+	$.ajax({
+			async: false,
+			url: ruta,
+			type: "POST",
+			data: "descripcion="+descripcion.value+"&cod_auto="+cod_auto.value+"&precio="+precio.value,
+			success: function(datos)
+			{ 
+				if(datos!="")
+					{
+					
+					window.location.reload();
+					}
+				else
+					{
+					alert("Ha ocurrido un error, reintente");
+					}
+				
+			}
+		
+	});
 
+}
+function setModalComentario(codigoAuto)
+{
+	cod_auto.value = codigoAuto;
+	}
+
+
+</script>
+<script type="text/javascript">
+function justNumbers(e)
+{
+var keynum = window.event ? window.event.keyCode : e.which;
+if ((keynum == 8) || (keynum == 46))
+return true;
+ 
+return /\d/.test(String.fromCharCode(keynum));
+} </script>
+
+<script type="text/javascript">
+function validaDes()
+{
+if( descripcion.value =="" )
+{
+alert("La descripcion debe tener un valor");
+descripcion.focus();
+btnModific.disable=true;
+return false;
+}
+else
+{ btnModific.disable=false;
+return true; }
+}
+
+</script>
+
+<script type="text/javascript">
+function validaPre()
+{
+if(precio.value == "")
+{
+alert("El precio debe tener un valor");
+precio.focus();
+btnModific.disable=true;
+return false;
+}
+else
+{btnModific.disable=false;
+return true; }
+}
+
+</script>
 
 
 </body></html>

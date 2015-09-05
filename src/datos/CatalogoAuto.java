@@ -56,7 +56,7 @@ public class CatalogoAuto {
 		}
 	public static int UpdateAuto (Auto AutoUPD)
 	{
-		String SQLCons= "UPDATE Auto SET descripcion=? , precio_sug=?, valoracion=?, nombre_auto=?, cod_marca=?, ano_fabric=?, imagen=? WHERE ?=cod_auto ";
+		String SQLCons= "UPDATE Auto SET descripcion=? , precio_sug=? WHERE ?=cod_auto ";
 		try{
 			
 		ConexionBD conecta = new ConexionBD();
@@ -64,12 +64,7 @@ public class CatalogoAuto {
 		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
 		stmt.setString(1, AutoUPD.getDescripcionAuto());
 		stmt.setFloat(2, AutoUPD.getPrecio());
-		stmt.setInt(3, AutoUPD.getValoracion());
-		stmt.setString(4, AutoUPD.getNombre_auto());
-		stmt.setInt(5, AutoUPD.getCod_marca());
-		stmt.setInt(6, AutoUPD.getAnoFabricacion());
-		stmt.setString(7, AutoUPD.getImagen());
-		stmt.setInt(8, AutoUPD.getCod_auto());
+		stmt.setInt(3, AutoUPD.getCod_auto());
 		
 		int rta = stmt.executeUpdate();
 		}		

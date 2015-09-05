@@ -34,16 +34,13 @@ public class ControladorAuto {
 		return AutoDev;
 	}
 	
-	public static int UpdateAuto(int pCod_auto, String pDescripcion, float pPrecio_sug, int pValoracion, String pNombre_auto, int pCod_marca, int pAno_fabric)
+	public static int UpdateAuto(int pCod_auto, String pDescripcion, float pPrecio_sug)
 	{
 		int rowAffect;
 		Auto modifAuto = new Auto();
 		modifAuto.setDescripcionAuto(pDescripcion);
 		modifAuto.setCod_auto(pCod_auto);
 		modifAuto.setPrecio(pPrecio_sug);
-		modifAuto.setAnoFabricacion(pValoracion);
-		modifAuto.setNombre_auto(pNombre_auto);
-		modifAuto.setAnoFabricacion(pAno_fabric);
 		rowAffect = CatalogoAuto.UpdateAuto(modifAuto);
 		return rowAffect;/*Devuelve la cantidad de filas afectadas por el update*/
 		

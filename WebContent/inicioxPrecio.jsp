@@ -49,15 +49,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">Acerca de</a>
-                    </li>
-                    <li>
-                        <a href="#">Servicios</a>
-                    </li>
-                    <li>
-                        <a href="#">Contacto</a>
-                    </li>
+                 
                     </ul>
                     <div class="pull-right">
                     <% 
@@ -90,7 +82,7 @@ MarcasAll = CatalogoMarca.GetAll();
     { 
 %>    	
 					<a class="navbar-brand" href="nuevologin.jsp">Login</a>
-					<a class="navbar-brand" href="signin.jsp">Registrarse</a>
+					<a class="navbar-brand" href="SingUp.jsp">Registrarse</a>
 <% 
     }
     }catch(NullPointerException ex){} 
@@ -171,13 +163,13 @@ MarcasAll = CatalogoMarca.GetAll();
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/bmw.jpg" alt="">
                                 </div>
                                 <div class="item active left">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/MB.jpg" alt="">
                                 </div>
                                 <div class="item next left">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/audi.png" alt="">
                                 </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">

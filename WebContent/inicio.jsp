@@ -155,13 +155,13 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/bmw.jpg" alt="">
                                 </div>
                                 <div class="item active left">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/audi.png" alt="">
                                 </div>
                                 <div class="item next left">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/MB.jpg" alt="">
                                 </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">

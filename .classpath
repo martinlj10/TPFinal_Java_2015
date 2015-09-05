@@ -8,8 +8,8 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Eze/Desktop/Java/apache-tomcat-7.0.63/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Eze/Desktop/Java/apache-tomcat-7.0.63/lib/mysql-connector-java-5.1.36.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Eze/Desktop/Java/javax.jar"/>
+	<classpathentry kind="lib" path="build/javax.jar"/>
+	<classpathentry kind="lib" path="build/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="lib" path="build/servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -33,7 +33,8 @@ public class CatalogoUsuarios {
 						
 						userBD.setUsername(rta.getString("username"));
 						userBD.setPassword(rta.getString("password"));
-		}
+						userBD.setCod_rol(Integer.parseInt(rta.getString("cod_rol")));
+								}
 					rta.close();
 					stmt.close();
 						

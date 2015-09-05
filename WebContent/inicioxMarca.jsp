@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Martin Lopez Jordan">
+    <meta name="author" content="Martin Lopez Jordan & Ezequiel Echeveste">
 
     <title>Coment@utos Web</title>
 
@@ -47,15 +47,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">Acerca de</a>
-                    </li>
-                    <li>
-                        <a href="#">Servicios</a>
-                    </li>
-                    <li>
-                        <a href="#">Contacto</a>
-                    </li>
+                    
                     </ul>
                     <div class="pull-right">
                     <% 
@@ -88,7 +80,7 @@
     { 
 %>    	
 					<a class="navbar-brand" href="nuevologin.jsp">Login</a>
-					<a class="navbar-brand" href="signin.jsp">Registrarse</a>
+					<a class="navbar-brand" href="SingUp.jsp">Registrarse</a>
 <% 
     }
     }catch(NullPointerException ex){} 
@@ -168,13 +160,13 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/bmw.jpg" alt="">
                                 </div>
                                 <div class="item active left">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/MB.jpg" alt="">
                                 </div>
                                 <div class="item next left">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/audi.png" alt="">
                                 </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -194,7 +186,7 @@
                     
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" WIDTH=320 HEIGHT=150 alt="">
+                            <img src="img/<%=AutosAll.get(i).getImagen() %>" WIDTH=320 HEIGHT=150 alt="">
                             <div class="caption">
                                 <h4><a id="cod_auto" href="selectOne.jsp?cod_auto=<%=AutosAll.get(i).getCod_auto()%>"><%=CatalogoMarca.GetOneCod(AutosAll.get(i).getCod_marca()).getDescrip_marca()%>-<%=AutosAll.get(i).getNombre_auto() %></a>
                                 </h4>
