@@ -59,14 +59,19 @@ public class ControladorAuto {
 	 CatalogoAuto.ActualizaValoracion(pIdCod_Auto, pValoracion);
 	 
  }
-	
+
 public static ArrayList<Auto> getAllxMarca(int pCod_Marca)
 {
 return CatalogoAuto.GetAllxMarca(pCod_Marca);	
 }
+
+
 public static ArrayList<Auto> getAllxPrecio(float pPrecio_min, float pPrecio_max)
 {
 return CatalogoAuto.GetAllxPrecios(pPrecio_min, pPrecio_max);	
 }
  
 }
+
+
+

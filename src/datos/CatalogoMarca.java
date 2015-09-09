@@ -17,7 +17,7 @@ public class CatalogoMarca {
 		try{
 			
 			//Agrega una marca a la Tabla Marca 
-		String SQLCons= "INSERT INTO Marca ("+CAMPOS+") VALUES (?,?)"; 
+		String SQLCons= "INSERT INTO marca ("+CAMPOS+") VALUES (?,?)"; 
 	ConexionBD conecta = new ConexionBD();
 	conecta.OpenConection();
 	PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
@@ -35,7 +35,7 @@ public class CatalogoMarca {
 	}
 	public static void DeleteMarca(int pCod_Marca)
 	{
-		String SQLCons= "DELETE FROM Marca where ? = cod_marca";
+		String SQLCons= "DELETE FROM marca where ? = cod_marca";
 		try {
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
@@ -51,7 +51,7 @@ public class CatalogoMarca {
 		}
 	public static int UpdateMarca (Marca MarcaUPD)
 	{
-		String SQLCons= "UPDATE Marca SET descripcion_marca=? WHERE ?=cod_marca ";
+		String SQLCons= "UPDATE marca SET descripcion_marca=? WHERE ?=cod_marca ";
 		try{
 			
 		ConexionBD conecta = new ConexionBD();
@@ -75,7 +75,7 @@ public class CatalogoMarca {
 	ArrayList<Marca> MarcasAll = new ArrayList<Marca>();
 		
 		try {
-			String SQLCons= "Select "+CAMPOS+" FROM Marca";
+			String SQLCons= "Select "+CAMPOS+" FROM marca";
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
@@ -102,7 +102,7 @@ public class CatalogoMarca {
 		try{
 			
 		
-		String SQLCons= "SELECT "+CAMPOS+" FROM Marca WHERE descripcion_marca=?";
+		String SQLCons= "SELECT "+CAMPOS+" FROM marca WHERE descripcion_marca=?";
 		ConexionBD conecta = new ConexionBD();
 		conecta.OpenConection();
 		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
@@ -131,7 +131,7 @@ public class CatalogoMarca {
 		try{
 			
 		
-		String SQLCons= "SELECT "+CAMPOS+" FROM Marca WHERE cod_marca=?";
+		String SQLCons= "SELECT "+CAMPOS+" FROM marca WHERE cod_marca=?";
 		ConexionBD conecta = new ConexionBD();
 		conecta.OpenConection();
 		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);

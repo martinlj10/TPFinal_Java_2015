@@ -151,13 +151,16 @@
 					if(Integer.parseInt(session.getAttribute("cod_rol").toString())==1){ %>
                     <div class="text-right">
                         
-                       <button type="button" class="btn btn-info btn-lg" onclick="setModalComentario(<%=AutoSel.getCod_auto()%>)" data-toggle="modal" data-target="#myModal">Deja tu Comentario</button>
+                       <button type="button" class="btn btn-info btn-lg" onclick="setModalComentario(<%=AutoSel.getCod_auto()%>)" 
+                       data-toggle="modal" data-target="#myModal">Deja tu Comentario</button>
                        
                     <% 
                     } else if(Integer.parseInt(session.getAttribute("cod_rol").toString())==2){%>
                     	<div class="text-right">
-                    	  	<button type="button" class="btn btn-info btn-lg" onclick="setModalComentario(<%=AutoSel.getCod_auto()%>)" data-toggle="modal" data-target="#myModalModific">Editar</button>
-                   		    <button type="button" class="btn btn-info btn-lg" onclick="setModalComentario(<%=AutoSel.getCod_auto()%>)" data-toggle="modal" data-target="#myModalEliminar">Eliminar</button>              		
+                    	  	<button type="button" class="btn btn-info btn-lg" onclick="setModalComentario(<%=AutoSel.getCod_auto()%>)"
+                    	  	 data-toggle="modal" data-target="#myModalModific">Editar</button>
+                   		    <button type="button" class="btn btn-info btn-lg" onclick="setModalComentario(<%=AutoSel.getCod_auto()%>)" 
+                   		    data-toggle="modal" data-target="#myModalEliminar">Eliminar</button>              		
                    <% }}else 
                 	   {%>
                 	   <div class="text-right">

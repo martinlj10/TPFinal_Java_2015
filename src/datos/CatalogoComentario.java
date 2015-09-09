@@ -72,7 +72,7 @@ public class CatalogoComentario {
 		}
 	public static int UpdateComentario (Comentario ComentarioUPD)
 	{
-		String SQLCons= "UPDATE Comentario SET comentario=? WHERE (?=cod_auto AND ?= nombreUsuario, ?=fecha_public)";
+		String SQLCons= "UPDATE comentario SET comentario=? WHERE (?=cod_auto AND ?= nombreUsuario, ?=fecha_public)";
 		try{
 			
 		ConexionBD conecta = new ConexionBD();
@@ -98,7 +98,7 @@ public class CatalogoComentario {
 	ArrayList<Comentario> ComentariosAll = new ArrayList<Comentario>();
 		
 		try {
-			String SQLCons= "Select "+CAMPOS+" FROM Comentario WHERE cod_auto = ? ORDER BY fecha_public";
+			String SQLCons= "Select "+CAMPOS+" FROM comentario WHERE cod_auto = ? ORDER BY fecha_public";
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);

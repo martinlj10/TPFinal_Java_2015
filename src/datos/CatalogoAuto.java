@@ -16,7 +16,7 @@ public class CatalogoAuto {
 	{ //se cargan los autos
 		try{
 			
-			String SQLCons= "INSERT INTO Auto ("+CAMPOS+") VALUES (?,?,?,?,?,?,?,?)"; 
+			String SQLCons= "INSERT INTO auto ("+CAMPOS+") VALUES (?,?,?,?,?,?,?,?)"; 
 	ConexionBD conecta = new ConexionBD();
 	conecta.OpenConection();
 	PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
@@ -40,7 +40,7 @@ public class CatalogoAuto {
 	}
 	public static void DeleteAuto(int pCod_Auto)
 	{
-		String SQLCons= "DELETE FROM Auto where ? = cod_auto";
+		String SQLCons= "DELETE FROM auto where ? = cod_auto";
 		try {
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
@@ -56,7 +56,7 @@ public class CatalogoAuto {
 		}
 	public static int UpdateAuto (Auto AutoUPD)
 	{
-		String SQLCons= "UPDATE Auto SET descripcion=? , precio_sug=? WHERE ?=cod_auto ";
+		String SQLCons= "UPDATE auto SET descripcion=? , precio_sug=? WHERE ?=cod_auto ";
 		try{
 			
 		ConexionBD conecta = new ConexionBD();
@@ -81,7 +81,7 @@ public class CatalogoAuto {
 	ArrayList<Auto> AutosAll = new ArrayList<Auto>();
 		
 		try {
-			String SQLCons= "Select "+CAMPOS+" FROM Auto";
+			String SQLCons= "Select "+CAMPOS+" FROM auto";
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
@@ -115,7 +115,7 @@ public class CatalogoAuto {
 			
 		 
 		
-		String SQLCons= "SELECT "+CAMPOS+" FROM Auto WHERE cod_auto=?";
+		String SQLCons= "SELECT "+CAMPOS+" FROM auto WHERE cod_auto=?";
 		ConexionBD conecta = new ConexionBD();
 		conecta.OpenConection();
 		PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
@@ -167,7 +167,7 @@ public class CatalogoAuto {
 	ArrayList<Auto> AutosAll = new ArrayList<Auto>();
 		
 		try {
-			String SQLCons= "Select "+CAMPOS+" FROM Auto Where cod_marca=?";
+			String SQLCons= "Select "+CAMPOS+" FROM auto Where cod_marca=?";
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
@@ -197,7 +197,7 @@ public class CatalogoAuto {
 	ArrayList<Auto> AutosAll = new ArrayList<Auto>();
 		
 		try {
-			String SQLCons= "Select "+CAMPOS+" FROM Auto Where (precio_sug>? AND precio_sug<?)";
+			String SQLCons= "Select "+CAMPOS+" FROM auto Where (precio_sug>? AND precio_sug<?)";
 			ConexionBD conecta = new ConexionBD();
 			conecta.OpenConection();
 			PreparedStatement stmt = conecta.Cone.prepareStatement(SQLCons);
